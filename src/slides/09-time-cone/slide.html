@@ -1,16 +1,248 @@
-            <h2 class="text-5xl font-bold mb-10">Time-Cone Search<br><span class="text-2xl serif text-gray-500">像人类记忆一样搜索：先局部，再扩展</span></h2>
-            <div class="flex gap-16 items-center flex-grow">
-                <div class="cone">
-                    <div class="cone-layer" style="width: 300px; height: 50px;">ALL DATA</div>
-                    <div class="cone-layer" style="width: 200px; height: 40px;">7 DAYS</div>
-                    <div class="cone-layer" style="width: 100px; height: 30px; background: black; color: white; border: none;">NOW</div>
+            <div class="time-scatter-layout">
+                <div class="flex justify-end mb-2">
+                    <div class="page-marker">核心能力二 // TIME-CONE SEARCH</div>
                 </div>
-                <div class="w-1/2 space-y-4">
-                    <p class="text-lg serif italic">把时间记忆变成搜索空间压缩。</p>
-                    <ul class="text-sm text-gray-600 space-y-2">
-                        <li>• 理解 <b>observed_at</b> 的局部性</li>
-                        <li>• 候选集从 100,000 压缩到前 48 小时</li>
-                        <li>• 更快、更准、更自然</li>
-                    </ul>
+
+                <div class="time-scatter-header anim-fade-up">
+                    <h2 class="text-4xl font-bold tracking-tighter">Time-Cone Search：沿时间轴逐步扩展，直到命中目标</h2>
+                    <p class="text-base text-gray-500 serif italic mt-1">
+                        用户给出时间线索后，系统优先搜索最近窗口；若未命中，再按 24h 为单位向外扩展。
+                    </p>
                 </div>
+
+                <section class="time-scatter-stage anim-fade-up" style="animation-delay: 0.2s;">
+                    <div class="user-avatar" aria-hidden="true">
+                        <span></span>
+                    </div>
+                    <div class="query-bubble">
+                        <span class="mono">用户查询</span>
+                        <p>我这几天看过一些关于“肥尾效应”的内容</p>
+                    </div>
+
+                    <div class="data-summary">
+                        <div class="legend-row">
+                            <span><i class="legend-dot grey"></i>普通内容</span>
+                            <span><i class="legend-line blue"></i>搜索范围</span>
+                            <span><i class="legend-dot amber"></i>命中结果</span>
+                        </div>
+                    </div>
+
+                    <svg class="time-field" viewBox="0 0 900 360" aria-label="Time-Cone Search 时间散点场">
+                        <defs>
+                            <filter id="hitGlow" x="-120%" y="-120%" width="340%" height="340%">
+                                <feGaussianBlur stdDeviation="4" result="blur" />
+                                <feMerge>
+                                    <feMergeNode in="blur" />
+                                    <feMergeNode in="SourceGraphic" />
+                                </feMerge>
+                            </filter>
+                        </defs>
+
+                        <rect class="plot-bg" x="20" y="42" width="860" height="240" rx="4" />
+                        <rect class="recent-band band-72" x="304" y="42" width="576" height="240" />
+                        <rect class="recent-band band-48" x="448" y="42" width="432" height="240" />
+                        <rect class="recent-band band-24" x="664" y="42" width="216" height="240" />
+                        <line class="band-line line-72" x1="304" y1="42" x2="304" y2="282" />
+                        <line class="band-line line-48" x1="448" y1="42" x2="448" y2="282" />
+                        <line class="band-line line-24" x1="664" y1="42" x2="664" y2="282" />
+                        <g class="volume-label total-volume">
+                            <text x="34" y="254">全量数据</text>
+                            <text class="metric" x="34" y="268">100,000</text>
+                        </g>
+                        <g class="volume-label volume-72">
+                            <text x="316" y="254">72h 数据</text>
+                            <text class="metric" x="316" y="268">500</text>
+                        </g>
+                        <g class="volume-label volume-48">
+                            <text x="460" y="254">48h 数据</text>
+                            <text class="metric" x="460" y="268">200</text>
+                        </g>
+                        <g class="volume-label volume-24">
+                            <text x="676" y="254">24h 数据</text>
+                            <text class="metric" x="676" y="268">70</text>
+                        </g>
+
+                        <g class="corpus-points">
+                            <circle cx="80.6" cy="171.3" r="1.6" opacity="0.36" />
+                            <circle cx="237.9" cy="92.4" r="2.1" opacity="0.50" />
+                            <circle cx="582.8" cy="182.4" r="2.1" opacity="0.41" />
+                            <circle cx="103.4" cy="235.4" r="2.2" opacity="0.48" />
+                            <circle cx="404.7" cy="166.6" r="1.6" opacity="0.49" />
+                            <circle cx="390.7" cy="214.7" r="1.8" opacity="0.29" />
+                            <circle cx="277.3" cy="214.8" r="2.1" opacity="0.43" />
+                            <circle cx="298.5" cy="191.8" r="2.0" opacity="0.44" />
+                            <circle cx="555.0" cy="88.8" r="1.5" opacity="0.38" />
+                            <circle cx="378.7" cy="174.1" r="2.1" opacity="0.37" />
+                            <circle cx="161.2" cy="75.3" r="1.6" opacity="0.35" />
+                            <circle cx="837.4" cy="105.1" r="2.1" opacity="0.41" />
+                            <circle cx="179.7" cy="94.2" r="2.2" opacity="0.30" />
+                            <circle cx="753.6" cy="146.5" r="2.0" opacity="0.35" />
+                            <circle cx="265.0" cy="92.2" r="1.6" opacity="0.41" />
+                            <circle cx="577.8" cy="108.1" r="1.6" opacity="0.43" />
+                            <circle cx="759.9" cy="191.9" r="2.1" opacity="0.37" />
+                            <circle cx="97.3" cy="164.8" r="1.9" opacity="0.50" />
+                            <circle cx="369.2" cy="146.0" r="1.4" opacity="0.30" />
+                            <circle cx="850.1" cy="209.5" r="1.5" opacity="0.37" />
+                            <circle cx="256.6" cy="216.6" r="2.2" opacity="0.32" />
+                            <circle cx="274.2" cy="117.4" r="1.7" opacity="0.28" />
+                            <circle cx="508.6" cy="153.6" r="1.6" opacity="0.41" />
+                            <circle cx="612.5" cy="175.8" r="1.6" opacity="0.36" />
+                            <circle cx="452.0" cy="112.5" r="2.2" opacity="0.49" />
+                            <circle cx="820.1" cy="76.4" r="1.6" opacity="0.40" />
+                            <circle cx="459.1" cy="240.5" r="2.0" opacity="0.46" />
+                            <circle cx="289.0" cy="189.9" r="1.4" opacity="0.35" />
+                            <circle cx="377.7" cy="239.2" r="1.4" opacity="0.41" />
+                            <circle cx="324.5" cy="186.9" r="1.8" opacity="0.34" />
+                            <circle cx="586.4" cy="77.9" r="2.1" opacity="0.44" />
+                            <circle cx="716.1" cy="164.4" r="2.2" opacity="0.50" />
+                            <circle cx="741.9" cy="81.4" r="1.8" opacity="0.42" />
+                            <circle cx="369.3" cy="76.1" r="2.2" opacity="0.38" />
+                            <circle cx="294.0" cy="170.2" r="1.4" opacity="0.37" />
+                            <circle cx="342.8" cy="96.2" r="1.4" opacity="0.34" />
+                            <circle cx="287.5" cy="146.0" r="2.2" opacity="0.43" />
+                            <circle cx="505.6" cy="192.5" r="1.6" opacity="0.48" />
+                            <circle cx="613.8" cy="184.7" r="2.0" opacity="0.41" />
+                            <circle cx="106.5" cy="112.1" r="1.4" opacity="0.36" />
+                            <circle cx="382.9" cy="182.8" r="2.1" opacity="0.34" />
+                            <circle cx="541.9" cy="132.9" r="2.0" opacity="0.40" />
+                            <circle cx="685.9" cy="119.0" r="2.1" opacity="0.49" />
+                            <circle cx="795.6" cy="99.9" r="1.9" opacity="0.39" />
+                            <circle cx="308.7" cy="147.2" r="1.4" opacity="0.46" />
+                            <circle cx="211.3" cy="239.5" r="2.0" opacity="0.41" />
+                            <circle cx="260.9" cy="170.3" r="2.2" opacity="0.31" />
+                            <circle cx="399.6" cy="238.4" r="2.0" opacity="0.31" />
+                            <circle cx="386.2" cy="221.5" r="2.1" opacity="0.47" />
+                            <circle cx="339.7" cy="232.0" r="1.9" opacity="0.41" />
+                            <circle cx="729.2" cy="202.2" r="1.8" opacity="0.45" />
+                            <circle cx="102.8" cy="208.5" r="2.0" opacity="0.33" />
+                            <circle cx="82.0" cy="212.2" r="2.2" opacity="0.37" />
+                            <circle cx="96.1" cy="90.1" r="2.1" opacity="0.34" />
+                            <circle cx="301.6" cy="134.7" r="2.0" opacity="0.35" />
+                            <circle cx="462.8" cy="203.3" r="1.4" opacity="0.47" />
+                            <circle cx="176.6" cy="128.5" r="2.2" opacity="0.46" />
+                            <circle cx="63.6" cy="206.9" r="1.7" opacity="0.48" />
+                            <circle cx="345.7" cy="87.7" r="2.0" opacity="0.34" />
+                            <circle cx="418.6" cy="191.8" r="1.4" opacity="0.46" />
+                            <circle cx="146.4" cy="198.8" r="1.5" opacity="0.37" />
+                            <circle cx="727.8" cy="148.1" r="1.8" opacity="0.44" />
+                            <circle cx="69.1" cy="159.7" r="1.9" opacity="0.50" />
+                            <circle cx="210.3" cy="223.1" r="1.9" opacity="0.34" />
+                            <circle cx="834.4" cy="185.9" r="1.9" opacity="0.50" />
+                            <circle cx="132.4" cy="204.2" r="1.8" opacity="0.30" />
+                            <circle cx="352.4" cy="221.8" r="1.9" opacity="0.45" />
+                            <circle cx="373.7" cy="93.9" r="1.5" opacity="0.36" />
+                            <circle cx="161.4" cy="109.9" r="1.4" opacity="0.29" />
+                            <circle cx="502.3" cy="153.1" r="1.7" opacity="0.46" />
+                            <circle cx="280.3" cy="222.4" r="1.6" opacity="0.41" />
+                            <circle cx="269.3" cy="107.2" r="1.8" opacity="0.34" />
+                            <circle cx="535.7" cy="204.8" r="2.2" opacity="0.40" />
+                            <circle cx="460.9" cy="139.3" r="2.2" opacity="0.41" />
+                            <circle cx="281.4" cy="124.9" r="2.2" opacity="0.36" />
+                            <circle cx="351.7" cy="209.1" r="2.2" opacity="0.40" />
+                            <circle cx="401.8" cy="211.3" r="1.7" opacity="0.36" />
+                            <circle cx="777.8" cy="189.4" r="1.6" opacity="0.41" />
+                            <circle cx="107.5" cy="80.6" r="2.0" opacity="0.32" />
+                            <circle cx="570.5" cy="183.2" r="2.0" opacity="0.31" />
+                            <circle cx="285.6" cy="197.4" r="2.1" opacity="0.35" />
+                            <circle cx="477.0" cy="121.1" r="2.1" opacity="0.33" />
+                            <circle cx="469.8" cy="185.3" r="1.7" opacity="0.30" />
+                            <circle cx="427.5" cy="162.0" r="1.8" opacity="0.48" />
+                            <circle cx="418.5" cy="94.3" r="1.7" opacity="0.39" />
+                            <circle cx="435.7" cy="123.7" r="2.2" opacity="0.35" />
+                            <circle cx="361.2" cy="83.3" r="2.1" opacity="0.31" />
+                            <circle cx="708.0" cy="183.2" r="1.7" opacity="0.33" />
+                            <circle cx="186.3" cy="205.8" r="1.7" opacity="0.32" />
+                            <circle cx="286.3" cy="170.1" r="1.7" opacity="0.29" />
+                            <circle cx="340.9" cy="239.9" r="2.0" opacity="0.47" />
+                            <circle cx="444.3" cy="170.4" r="1.5" opacity="0.40" />
+                            <circle cx="687.9" cy="151.0" r="1.5" opacity="0.41" />
+                            <circle cx="808.2" cy="230.1" r="1.6" opacity="0.30" />
+                            <circle cx="418.2" cy="223.7" r="1.9" opacity="0.41" />
+                            <circle cx="240.4" cy="192.2" r="1.7" opacity="0.36" />
+                            <circle cx="418.1" cy="157.5" r="1.7" opacity="0.37" />
+                            <circle cx="283.1" cy="237.3" r="1.7" opacity="0.39" />
+                            <circle cx="315.7" cy="139.7" r="1.8" opacity="0.31" />
+                            <circle cx="319.0" cy="243.1" r="1.5" opacity="0.43" />
+                            <circle cx="644.9" cy="141.8" r="1.9" opacity="0.37" />
+                            <circle cx="604.5" cy="113.6" r="1.9" opacity="0.48" />
+                            <circle cx="324.7" cy="91.4" r="2.0" opacity="0.31" />
+                            <circle cx="818.8" cy="114.4" r="2.1" opacity="0.33" />
+                            <circle cx="430.7" cy="94.3" r="2.0" opacity="0.38" />
+                            <circle cx="106.0" cy="238.8" r="1.5" opacity="0.35" />
+                            <circle cx="812.9" cy="243.4" r="1.6" opacity="0.47" />
+                            <circle cx="647.1" cy="224.8" r="2.2" opacity="0.37" />
+                            <circle cx="365.4" cy="149.6" r="1.6" opacity="0.46" />
+                            <circle cx="383.2" cy="200.2" r="1.4" opacity="0.42" />
+                            <circle cx="572.9" cy="212.0" r="1.8" opacity="0.40" />
+                            <circle cx="430.6" cy="231.0" r="2.1" opacity="0.35" />
+                        </g>
+
+                        <g class="soft-labels">
+                            <path d="M 97 165 C 112 152, 126 148, 144 143" />
+                            <text x="148" y="145">广告复盘</text>
+                            <path d="M 176 128 C 190 116, 203 111, 222 108" />
+                            <text x="226" y="110">客户访谈</text>
+                            <path d="M 345 88 C 358 73, 374 68, 392 66" />
+                            <text x="396" y="68">产品路线</text>
+                            <path d="M 418 224 C 432 232, 446 237, 462 240" />
+                            <text x="466" y="243">融资提纲</text>
+                            <path d="M 570 183 C 553 191, 542 201, 533 214" />
+                            <text x="498" y="224">黑天鹅</text>
+                            <path d="M 604 114 C 590 104, 574 99, 556 99" />
+                            <text x="524" y="101">反脆弱</text>
+                            <path d="M 728 148 C 744 139, 760 136, 778 137" />
+                            <text x="782" y="139">杠铃策略</text>
+                            <path d="M 818 114 C 804 103, 791 96, 774 91" />
+                            <text x="736" y="91">波动率</text>
+                        </g>
+
+                        <path class="bracket bracket-72" d="M 304 32 L 304 24 L 880 24 L 880 32" />
+                        <path class="bracket bracket-48" d="M 448 18 L 448 10 L 880 10 L 880 18" />
+                        <path class="bracket bracket-24" d="M 664 4 L 664 -4 L 880 -4 L 880 4" />
+                        <text class="bracket-label label-72" x="312" y="21">03 扩到72h</text>
+                        <text class="bracket-label label-48" x="456" y="7">02 扩到48h</text>
+                        <text class="bracket-label label-24" x="672" y="-7">01 最近24h</text>
+
+                        <circle class="hit-point" cx="352" cy="158" r="5.5" filter="url(#hitGlow)" />
+                        <circle class="hit-pulse" cx="352" cy="158" r="8" />
+                        <path class="hit-leader" d="M 358 158 C 376 153, 387 144, 398 132" />
+                        <g class="hit-label">
+                            <text x="402" y="118">04 命中结果</text>
+                            <text class="hit-title" x="402" y="136">肥尾效应</text>
+                        </g>
+
+                        <g class="time-axis">
+                            <line x1="28" y1="308" x2="872" y2="308" />
+                            <text x="28" y="331">更早历史</text>
+                            <text class="break-mark" x="270" y="331">//</text>
+                            <text x="304" y="331">72h前</text>
+                            <text x="448" y="331">48h前</text>
+                            <text x="664" y="331">24h前</text>
+                            <text x="872" y="331" text-anchor="end">现在</text>
+                        </g>
+                    </svg>
+
+                    <div class="step-strip">
+                        <div class="scatter-step active">
+                            <span class="mono">01</span>
+                            <strong>先搜最近24h</strong>
+                            <p>时间线索先落到最近 24h，只需检索约 70 条近期记录。</p>
+                        </div>
+                        <div class="scatter-step">
+                            <span class="mono">02</span>
+                            <strong>未命中，扩到48h</strong>
+                            <p>如果 24h 内没有命中，范围扩大到 48h，候选集变成约 200 条。</p>
+                        </div>
+                        <div class="scatter-step">
+                            <span class="mono">03</span>
+                            <strong>继续扩到72h</strong>
+                            <p>如果仍然不足，再扩到 72h，在约 500 条记录里继续精搜。</p>
+                        </div>
+                        <div class="scatter-step hit">
+                            <span class="mono">04</span>
+                            <strong>命中目标并返回</strong>
+                            <p>在 72h 窗口中找到“肥尾效应”；若仍未命中，再进入全库。</p>
+                        </div>
+                    </div>
+                </section>
             </div>
