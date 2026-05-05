@@ -1,0 +1,183 @@
+body.print-export {
+  align-items: flex-start;
+  height: auto;
+  overflow: auto;
+  padding: 24px 0;
+}
+
+body.print-export .bp-shell {
+  display: block;
+  width: auto;
+}
+
+body.print-export .paper {
+  display: block;
+  height: auto;
+  max-height: none;
+  overflow: visible;
+  position: static;
+  transform: none;
+}
+
+body.print-export .slide-stage {
+  height: auto;
+  position: static;
+}
+
+body.print-export .slide {
+  background-color: var(--paper-bg);
+  display: flex !important;
+  height: 675px;
+  left: auto;
+  overflow: hidden;
+  position: relative;
+  top: auto;
+  width: 1200px;
+}
+
+body.print-export .slide::after {
+  bottom: 30px;
+  color: var(--ink-black);
+  content: attr(data-page-label);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  opacity: 0.4;
+  position: absolute;
+  right: 40px;
+}
+
+body.print-export .slide > .mt-auto {
+  bottom: var(--slide-padding-y);
+  left: var(--slide-padding-x);
+  margin-top: 0;
+  position: absolute;
+  right: var(--slide-padding-x);
+}
+
+body.print-export .slide[data-slug="01-cover"] > .flex-grow,
+body.print-export .slide[data-slug="21-closing"] > .flex-grow {
+  bottom: 116px;
+  flex-grow: 0;
+  left: var(--slide-padding-x);
+  position: absolute;
+  right: var(--slide-padding-x);
+  top: 140px;
+}
+
+body.print-export .page-num {
+  display: none;
+}
+
+body.print-export .bp-toolbar {
+  position: fixed;
+}
+
+@page {
+  margin: 0;
+  size: 1200px 675px;
+}
+
+@media print {
+  *,
+  *::before,
+  *::after {
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  html {
+    height: auto;
+    margin: 0;
+    min-height: 0;
+    width: 1200px;
+  }
+
+  body {
+    align-items: flex-start;
+    background: var(--paper-bg);
+    display: block;
+    height: auto;
+    margin: 0;
+    min-height: 0;
+    overflow: visible;
+    padding: 0;
+    width: 1200px;
+  }
+
+  .bp-toolbar,
+  .page-num {
+    display: none !important;
+  }
+
+  .bp-shell,
+  .paper,
+  .slide-stage {
+    display: block;
+    height: auto;
+    max-height: none;
+    max-width: none;
+    min-height: 0;
+    overflow: visible;
+    position: static;
+    width: 100%;
+  }
+
+  .paper::before {
+    display: none;
+  }
+
+  .paper {
+    box-shadow: none;
+    transform: none;
+  }
+
+  .slide {
+    animation: none !important;
+    background-color: var(--paper-bg);
+    break-after: auto;
+    break-inside: avoid;
+    display: flex !important;
+    flex-direction: column;
+    height: 674px;
+    left: auto;
+    contain: layout paint;
+    overflow: clip;
+    page-break-after: auto;
+    page-break-inside: avoid;
+    position: relative;
+    print-color-adjust: exact;
+    top: auto;
+    -webkit-print-color-adjust: exact;
+    margin-bottom: -1px;
+    width: 1200px;
+  }
+
+  .slide::after {
+    bottom: 30px;
+    color: var(--ink-black);
+    content: attr(data-page-label);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    opacity: 0.4;
+    position: absolute;
+    right: 40px;
+  }
+
+  .slide > .mt-auto {
+    bottom: var(--slide-padding-y);
+    left: var(--slide-padding-x);
+    margin-top: 0;
+    position: absolute;
+    right: var(--slide-padding-x);
+  }
+
+  .slide[data-slug="01-cover"] > .flex-grow,
+  .slide[data-slug="21-closing"] > .flex-grow {
+    bottom: 116px;
+    flex-grow: 0;
+    left: var(--slide-padding-x);
+    position: absolute;
+    right: var(--slide-padding-x);
+    top: 140px;
+  }
+}

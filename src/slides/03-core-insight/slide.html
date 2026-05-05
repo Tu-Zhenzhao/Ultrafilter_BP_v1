@@ -1,0 +1,125 @@
+            <div class="poster-layout">
+                <!-- Global Marker -->
+                <div class="flex justify-end pt-4 pr-4 absolute w-full top-0 z-50">
+                    <div class="page-marker">核心洞察 // THE DATA GAP</div>
+                </div>
+
+                <!-- 1. The Inventory Sea (Top Left) -->
+                <div class="inventory-section anim-fade-in" style="animation-delay: 0.1s;">
+                    <div class="flex items-start gap-8">
+                        <div class="massive-numbers">
+                            <span class="num-idle">68<span class="text-3xl">%</span></span>
+                            <span class="mono opacity-20 text-5xl mx-2">/</span>
+                            <span class="num-active">32<span class="text-3xl">%</span></span>
+                        </div>
+                        
+                        <div class="insight-highlight-top">
+                            <p class="handwriting text-2xl text-black leading-tight">
+                                “企业 AI 的瓶颈，<br>
+                                正在从数据存量转向<span class="font-bold actionability-highlight">数据可行动性</span>”
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="inventory-header mt-4">
+                        <h2 class="text-3xl font-bold tracking-tighter">数据缺口：企业数据很多，Agent-ready 很少</h2>
+                        <p class="text-lg mt-1 text-gray-400 mono font-bold">存量状态：只有 32% 的企业可用数据被投入使用，68% 未被充分利用 <a href="https://www.seagate.com/our-story/rethink-data/" target="_blank" class="source-tag">Seagate [1]</a></p>
+                    </div>
+                    <!-- The 15 Data Types Matrix Condensed to One Row -->
+                    <div class="data-matrix mt-6">
+                        <div class="matrix-row">
+                            <span>文档</span><span>PDF</span><span>CRM</span><span>ERP</span><span>Slack</span><span>Jira</span><span>会议记录</span><span>边缘数据</span>
+                        </div>
+                        <p class="text-[12px] mt-3 opacity-60 leading-tight">
+                            这些非结构化与结构化来源正在持续增长，成为企业数据的主体。 <a href="https://newsroom.ibm.com/2024-01-10-Data-Suggests-Growth-in-Enterprise-Adoption-of-AI-is-Due-to-Widespread-Deployment-by-Early-Adopters" target="_blank" class="source-tag">†</a>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 2. The True Gap / Friction Wall (Center) -->
+                <div class="friction-wall anim-slide-in-right" style="animation-delay: 0.4s;">
+                    <div class="friction-content">
+                        <h4 class="mono text-[11px] text-red-800 mb-2 font-bold">真正的缺口</h4>
+                        <p class="text-xl font-bold leading-snug max-w-2xl text-gray-800">
+                            真正的缺口在于：这些数据分散在不同系统、权限、格式和时间线里，还没有变成 Agent 可安全、准确、持续调用的工作上下文。
+                        </p>
+                        <div class="flex gap-12 mt-4 items-center">
+                            <div class="flex items-baseline gap-2">
+                                <span class="text-4xl font-mono font-bold text-black">94%</span>
+                                <span class="text-[11px] opacity-70 leading-tight">企业难以<br>跨系统集成数据 <a href="https://www.salesforce.com/uk/news/stories/connectivity-report-announcement-2025/" target="_blank" class="source-tag">*</a></span>
+                            </div>
+                            <div class="flex items-baseline gap-2">
+                                <span class="text-4xl font-mono font-bold opacity-30">32%</span>
+                                <span class="text-[11px] opacity-40 leading-tight">平均应用<br>被连接比例</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. The Spec Plate (Right Side) -->
+                <div class="spec-plate debossed anim-fade-up" style="animation-delay: 0.7s;">
+                    <div class="spec-header">
+                        <span class="mono text-[10px] opacity-50 font-bold">关键定义</span>
+                        <h3 class="font-bold text-2xl mt-1">AGENT-READY DATA</h3>
+                    </div>
+                    
+                    <p class="text-[14px] font-bold leading-relaxed mb-6 mt-4 text-black">
+                        进入 Agent 工作流的数据，需要同时满足四个条件：<br>
+                        <span class="text-red-800">找得到、用得住、保持新、动得了。</span>
+                    </p>
+                    
+                    <!-- 2x2 Threshold Cards -->
+                    <div class="threshold-grid">
+                        <div class="threshold-card">
+                            <h4 class="serif font-bold text-base mb-1">找得到</h4>
+                            <p class="text-[11px] text-gray-500 leading-tight">统一索引、metadata 和检索层，Agent 知道去哪里找。</p>
+                        </div>
+                        <div class="threshold-card">
+                            <h4 class="serif font-bold text-base mb-1">用得住</h4>
+                            <p class="text-[11px] text-gray-500 leading-tight">权限继承、来源引用与审计记录，结果可被验证。</p>
+                        </div>
+                        <div class="threshold-card">
+                            <h4 class="serif font-bold text-base mb-1">保持新</h4>
+                            <p class="text-[11px] text-gray-500 leading-tight">支持增量同步与 CRUD，避免过期结果进入流程。</p>
+                        </div>
+                        <div class="threshold-card">
+                            <h4 class="serif font-bold text-base mb-1">动得了</h4>
+                            <p class="text-[11px] text-gray-500 leading-tight">数据进入工具调用和业务动作，从“读”延伸到“做”。</p>
+                        </div>
+                    </div>
+
+                    <!-- Context Source Chips -->
+                    <div class="source-chips-section mt-5">
+                        <span class="mono text-[9px] opacity-40 font-bold block mb-2">典型上下文来源</span>
+                        <div class="source-category">
+                            <span class="cat-label">结构化</span>
+                            <div class="chips">
+                                <span class="chip">CRM</span><span class="chip">ERP</span><span class="chip">HCM</span><span class="chip">Warehouse</span>
+                            </div>
+                        </div>
+                        <div class="source-category mt-2">
+                            <span class="cat-label">非结构化</span>
+                            <div class="chips">
+                                <span class="chip">Email</span><span class="chip">PDF</span><span class="chip">Slack</span><span class="chip">Jira</span><span class="chip">Logs</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Final Risk Anchor -->
+                    <div class="risk-footer-anchor">
+                        <div class="flex items-center gap-3">
+                            <span class="mono text-[8px] px-1.5 py-0.5 bg-red-800 text-white">核心风险</span>
+                            <div class="h-[1px] flex-grow bg-gray-200"></div>
+                        </div>
+                        <div class="flex items-start gap-3 mt-2">
+                            <span class="font-mono font-bold text-red-800 leading-none text-4xl">60<span class="text-base">%</span></span>
+                            <div class="risk-text">
+                                <p class="text-[10px] font-bold leading-tight">缺乏 AI-ready data 支撑的项目，60% 到 2026 年可能被放弃。</p>
+                                <p class="text-[8px] text-gray-400 mt-0.5 mono">
+                                    <a href="https://www.gartner.com/en/newsroom/press-releases/2025-02-26-lack-of-ai-ready-data-puts-ai-projects-at-risk" target="_blank" class="source-link">Gartner, 2025 [4]</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>

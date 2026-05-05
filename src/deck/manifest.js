@@ -1,0 +1,22 @@
+export const slides = [
+  { index: 1, slug: "01-cover", title: "封面" },
+  { index: 2, slug: "02-market-shift", title: "时代变化" },
+  { index: 3, slug: "03-core-insight", title: "核心洞察" },
+  { index: 4, slug: "04-pain-points", title: "痛点" },
+  { index: 5, slug: "05-solution", title: "解决方案" },
+  { index: 6, slug: "06-product-experience", title: "产品体验" },
+  { index: 7, slug: "07-product-loop", title: "产品闭环" },
+  { index: 8, slug: "08-multimodal-search", title: "场景化多模态" },
+  { index: 9, slug: "09-time-cone", title: "Time-Cone Search" },
+  { index: 10, slug: "10-memory-trace", title: "Memory Trace" },
+  { index: 11, slug: "11-shared-state", title: "共享状态" },
+  { index: 12, slug: "12-market-entry", title: "市场入口" },
+  { index: 13, slug: "13-market-timing", title: "市场时机" },
+  { index: 14, slug: "14-business-model", title: "商业模式" },
+  { index: 15, slug: "15-competition", title: "竞争定位" },
+  { index: 16, slug: "16-ecosystem", title: "合作生态" },
+  { index: 17, slug: "17-moat", title: "护城河" },
+  { index: 18, slug: "18-milestones", title: "里程碑" },
+  { index: 19, slug: "19-funding", title: "融资需求" },
+  { index: 20, slug: "20-closing", title: "结尾" }
+];

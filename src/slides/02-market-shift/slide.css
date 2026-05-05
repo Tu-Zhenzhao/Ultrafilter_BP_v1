@@ -1,0 +1,253 @@
+/* Slide 02: 市场转折 - 恢复布局与集成引用 */
+
+.market-shift-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.market-header {
+  align-items: center;
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.editorial-line {
+  background: rgba(0, 0, 0, 0.1);
+  flex-grow: 1;
+  height: 1px;
+}
+
+.market-grid {
+  display: grid;
+  flex-grow: 1;
+  gap: 60px;
+  grid-template-columns: 1.4fr 1fr;
+}
+
+/* Narrative Column */
+.narrative-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.source-tag {
+  color: var(--ink-red);
+  font-family: serif;
+  font-size: 0.75rem;
+  margin-left: 2px;
+  opacity: 0.5;
+  text-decoration: none;
+  vertical-align: super;
+}
+
+.source-tag:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.comparison-container {
+  display: flex;
+  gap: 20px;
+}
+
+.compare-box {
+  background: rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  flex: 1;
+  padding: 15px;
+}
+
+.compare-box.new-way {
+  background: white;
+  border: 1px solid var(--ink-black);
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.05);
+}
+
+.compare-arrow {
+  align-self: center;
+  border-bottom: 5px solid transparent;
+  border-left: 8px solid var(--ink-grey);
+  border-top: 5px solid transparent;
+  height: 0;
+  opacity: 0.3;
+  width: 0;
+}
+
+.bulletin-item {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.bulletin-dot {
+  background: var(--ink-black);
+  flex-shrink: 0;
+  height: 6px;
+  margin-top: 10px;
+  width: 6px;
+}
+
+.bulletin-dot.warning {
+  background: var(--ink-red);
+  border-radius: 50%;
+}
+
+/* Evidence Column */
+.evidence-wall {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.evidence-card {
+  padding: 20px;
+}
+
+.card-num {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.card-num-sm {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.card-num .percent,
+.card-num-sm .percent {
+  font-size: 0.8rem;
+  opacity: 0.5;
+}
+
+.card-text {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  margin-top: 8px;
+  opacity: 0.8;
+}
+
+.card-text-xs {
+  font-size: 0.75rem;
+  line-height: 1.3;
+  margin-top: 4px;
+}
+
+.source-link {
+  color: var(--ink-grey);
+  font-size: 0.65rem;
+  opacity: 0.4;
+  text-decoration: none;
+}
+
+.source-link:hover {
+  color: var(--ink-red);
+  opacity: 1;
+}
+
+.evidence-card-split {
+  display: flex;
+  gap: 0;
+}
+
+.split-side {
+  background: rgba(0, 0, 0, 0.02);
+  flex: 1;
+  padding: 15px;
+}
+
+.direction-box {
+  border: 1px dashed rgba(0, 0, 0, 0.1);
+  margin-top: 10px;
+  padding: 15px;
+}
+
+.giant-links a {
+  color: var(--ink-black);
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.giant-links a:hover {
+  text-decoration: underline;
+}
+
+/* Footer & Insight Highlight */
+.market-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: auto;
+  padding-bottom: 20px;
+}
+
+[data-slug="02-market-shift"] .footer-insight-wrap {
+  align-items: center;
+  display: flex;
+  gap: 15px;
+}
+
+[data-slug="02-market-shift"] .handwritten-arrow {
+  flex: 0 0 auto;
+  height: 25px;
+  left: auto;
+  margin-top: 0;
+  opacity: 0.7;
+  position: static;
+  top: auto;
+  transform: rotate(-5deg);
+  width: 60px;
+}
+
+[data-slug="02-market-shift"] .insight-highlight {
+  display: inline-block;
+  padding: 0 5px;
+  position: relative;
+}
+
+[data-slug="02-market-shift"] .insight-highlight::after {
+  background: var(--sticky-yellow);
+  bottom: 2px;
+  content: "";
+  height: 12px;
+  left: -2px;
+  opacity: 0.5;
+  position: absolute;
+  transform: rotate(-0.8deg);
+  width: calc(100% + 4px);
+  z-index: -1;
+}
+
+.text-blue-900 {
+  color: var(--ink-blue);
+}
+
+.ink-focus {
+  border-bottom: 2px solid var(--ink-black);
+  font-weight: 600;
+}
+
+/* Animations */
+.anim-fade-up {
+  animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.anim-fade-in {
+  animation: fade-in 0.8s ease-out both;
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

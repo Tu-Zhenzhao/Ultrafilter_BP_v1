@@ -1,0 +1,18 @@
+:root {
+  --paper-bg: #f2f0e9;
+  --ink-black: #1a1a1a;
+  --ink-grey: #555555;
+  --ink-red: #b22222;
+  --ink-blue: #2f4f4f;
+  --sticky-yellow: #fff9c4;
+  --desk-bg: #c2c2bb;
+  --slide-canvas-width: 1200px;
+  --slide-canvas-height: 675px;
+  --slide-scale: 1;
+  --scaled-slide-width: 1200px;
+  --scaled-slide-height: 675px;
+  --viewport-padding-x: 48px;
+  --toolbar-space: 104px;
+  --slide-padding-x: 70px;
+  --slide-padding-y: 50px;
+}

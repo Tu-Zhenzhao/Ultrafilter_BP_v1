@@ -1,0 +1,236 @@
+/* Slide 06: 产品体验 - 2+5=1 公式化布局 */
+
+.experience-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.formula-header h2 {
+  font-size: 3rem;
+  line-height: 1.08;
+}
+
+.formula-header p {
+  font-size: 16px !important;
+  line-height: 1.55;
+  max-width: 780px;
+}
+
+.formula-stage {
+  align-items: flex-start;
+  display: flex;
+  flex-grow: 1;
+  gap: 14px;
+  justify-content: space-between;
+  margin-top: 34px !important;
+  min-height: 0;
+}
+
+.formula-col {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* The Big Formula Numbers */
+.formula-num {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 8.4rem;
+  font-weight: 900;
+  line-height: 0.88;
+}
+
+.formula-operator {
+  color: var(--ink-grey);
+  font-family: "Inter", sans-serif;
+  font-size: 4.5rem;
+  font-weight: 300;
+  margin-top: 34px;
+  opacity: 0.3;
+}
+
+.col-caption {
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  opacity: 0.6;
+  text-transform: uppercase;
+}
+
+/* User Col [2] - Airy */
+.user-col {
+  max-width: 340px;
+}
+
+.user-action-cards {
+  margin-top: 28px !important;
+}
+
+.u-card {
+  align-items: flex-start;
+  background: white;
+  border: 1.5px solid var(--ink-black);
+  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.05);
+  display: flex;
+  gap: 18px;
+  min-height: 112px;
+  padding: 20px;
+}
+
+.u-num {
+  color: var(--ink-red);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.u-body h4 {
+  font-family: "Noto Serif SC", serif;
+  font-size: 1.32rem;
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 9px;
+}
+
+.u-body p {
+  color: var(--ink-grey);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+/* System Col [5] - Dense */
+.system-col {
+  max-width: 420px;
+}
+
+.auto-ticker.mt-6 {
+  margin-top: 28px !important;
+}
+
+.auto-ticker {
+  background: white;
+  padding: 24px;
+}
+
+.auto-label {
+  background: var(--ink-red);
+  color: white;
+  display: inline-block;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  padding: 4px 8px;
+  margin-bottom: 18px;
+}
+
+.ticker-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.t-step {
+  border-left: 2px solid rgba(0, 0, 0, 0.05);
+  padding: 4px 0 4px 15px;
+}
+
+.t-name {
+  color: var(--ink-black);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
+  font-weight: 700;
+  margin-right: 10px;
+  text-transform: uppercase;
+}
+
+.t-desc {
+  color: var(--ink-grey);
+  font-size: 12px;
+  line-height: 1.35;
+  opacity: 0.68;
+}
+
+/* Result Col [1] - Highlighted */
+.result-col {
+  max-width: 300px;
+}
+
+.result-box {
+  background: #f8fff9;
+  border: 2px solid #2e8b57;
+  margin-top: 28px !important;
+  min-height: 214px;
+  padding: 24px 24px 20px;
+  position: relative;
+}
+
+.result-highlight h4 {
+  font-family: "Noto Serif SC", serif;
+  font-size: 1.45rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.result-highlight .mono {
+  display: inline-block;
+  font-size: 11px !important;
+  margin-top: 8px;
+}
+
+.result-details {
+  border-top: 1px dashed rgba(0, 0, 0, 0.1);
+  margin-top: 18px !important;
+  padding-top: 16px;
+}
+
+.result-details code {
+  background: rgba(0, 0, 0, 0.03);
+  display: block;
+  font-size: 13px;
+  padding: 12px;
+}
+
+.status-pill {
+  background: #2e8b57;
+  color: white;
+  display: inline-block;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 5px 11px;
+}
+
+/* Sticky Note Positioning */
+.formula-note {
+  left: 140px;
+  position: absolute;
+  top: 10px;
+  transform: rotate(4deg);
+  width: 180px;
+  z-index: 50;
+}
+
+.formula-note .handwriting {
+  font-size: 1.1rem;
+  line-height: 1.3;
+}
+
+.anim-fade-up { animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.anim-fade-in { animation: fade-in 1s ease-out both; }
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+
+.anim-node-glow {
+  animation: node-glow 0.8s ease-out both;
+}
+
+@keyframes node-glow {
+  from { opacity: 0; transform: translateX(-10px); }
+  to { opacity: 1; transform: translateX(0); }
+}

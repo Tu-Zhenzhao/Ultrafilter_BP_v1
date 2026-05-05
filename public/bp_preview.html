@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultrafilter AI - Business Plan v1</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=JetBrains+Mono:wght@300;400&family=Inter:wght@300;400;600&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --paper-bg: #F2F0E9;
+            --ink-black: #1A1A1A;
+            --ink-grey: #555555;
+            --ink-red: #B22222;
+            --ink-blue: #2F4F4F;
+            --sticky-yellow: #FFF9C4;
+        }
+
+        body {
+            background-color: #C2C2BB;
+            font-family: 'Inter', sans-serif;
+            color: var(--ink-black);
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* 纸张容器 */
+        .paper {
+            position: relative;
+            background-color: var(--paper-bg);
+            width: 90vw;
+            height: 56.25vw; 
+            max-width: 1200px;
+            max-height: 675px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.12), 0 10px 20px rgba(0,0,0,0.08), inset 0 0 100px rgba(0,0,0,0.02);
+            overflow: hidden;
+        }
+
+        /* 物理质感叠加层 */
+        .paper::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            opacity: 0.35;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            z-index: 20;
+            mix-blend-mode: overlay;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            padding: 50px 70px;
+            box-sizing: border-box;
+            display: none;
+            flex-direction: column;
+            z-index: 10;
+        }
+
+        .slide.active { display: flex; animation: slideIn 0.5s ease forwards; }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(15px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* 字体样式 */
+        .handwriting { font-family: 'Caveat', cursive; color: var(--ink-blue); font-size: 1.4rem; transform: rotate(-1.5deg); }
+        h1, h2, h3, .serif { font-family: 'Noto Serif SC', serif; }
+        .mono { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-grey); }
+
+        /* 物理元素 */
+        .debossed {
+            background: rgba(0,0,0,0.012);
+            box-shadow: inset 2px 2px 5px rgba(0,0,0,0.06), inset -1px -1px 2px rgba(255,255,255,0.5);
+            border-radius: 4px;
+            border: 1px solid rgba(0,0,0,0.02);
+        }
+
+        .sticky-note {
+            background-color: var(--sticky-yellow);
+            padding: 20px;
+            width: 220px;
+            box-shadow: 5px 10px 15px rgba(0,0,0,0.05);
+            transform: rotate(2deg);
+            position: relative;
+            z-index: 30;
+            border-left: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .sticky-note::after {
+            content: ""; position: absolute; bottom: 2px; right: 5px; width: 30px; height: 10px;
+            box-shadow: 10px 5px 10px rgba(0,0,0,0.1); transform: skew(15deg) rotate(5deg);
+        }
+
+        .stamp {
+            border: 2px solid var(--ink-red); color: var(--ink-red); padding: 4px 12px; font-weight: 900;
+            text-transform: uppercase; display: inline-block; transform: rotate(-8deg); opacity: 0.7;
+            font-family: 'JetBrains Mono', monospace; border-radius: 2px; mix-blend-mode: multiply; font-size: 0.75rem;
+        }
+
+        /* 导航控制 */
+        .nav-controls { position: fixed; bottom: 20px; display: flex; gap: 8px; z-index: 100; }
+        .nav-dot { width: 8px; height: 8px; background: rgba(0,0,0,0.2); border-radius: 50%; cursor: pointer; transition: all 0.3s; }
+        .nav-dot.active { background: var(--ink-black); transform: scale(1.5); }
+        .page-num { position: absolute; bottom: 30px; right: 40px; font-family: 'JetBrains Mono'; font-size: 10px; opacity: 0.4; }
+
+        /* Time-Cone Visual */
+        .cone { position: relative; width: 300px; height: 180px; margin: 0 auto; display: flex; flex-direction: column-reverse; align-items: center; }
+        .cone-layer { border: 1px dashed var(--ink-black); background: rgba(0,0,0,0.02); margin-top: -5px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-family: 'JetBrains Mono'; }
+
+        @media print {
+            .nav-controls { display: none; }
+            body { background: white; }
+            .paper { box-shadow: none; width: 100%; height: auto; }
+            .slide { position: relative; display: block !important; page-break-after: always; height: 100vh; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="paper" id="deck">
+        <!-- 页面指示 -->
+        <div class="page-num" id="pageNum">01 / 21</div>
+
+        <!-- Slide 1: 封面 -->
+        <div class="slide active" data-index="1">
+            <div class="flex justify-between items-start">
+                <img src="/artifacts/UltrafilterAI.png" alt="Logo" class="w-20 mix-blend-multiply opacity-90">
+                <div class="text-right mono">UF // SEED ROUND<br>PROJECT ARTIFACT V1</div>
+            </div>
+            <div class="flex-grow flex flex-col justify-center max-w-4xl">
+                <h1 class="text-8xl font-bold tracking-tighter mb-4">Ultrafilter</h1>
+                <h2 class="text-3xl serif italic text-gray-500 mb-10">AI Agent 的私有多模态搜索基础设施</h2>
+                <div class="h-[2px] bg-black w-40 mb-10"></div>
+                <p class="text-xl font-light leading-relaxed mb-6">
+                    Connect user-owned data to AI agents through reliable, stateful, multimodal search.
+                </p>
+                <div class="handwriting mt-8 ml-12">—— “让 Agent 能够稳定地调用那一条关键信息。”</div>
+            </div>
+            <div class="mt-auto border-t border-black pt-6 flex justify-between mono font-bold">
+                <div>ULTRAFILTER FOUNDATION</div>
+                <div>THE INFORMATION CALLING PRINCIPLE</div>
+            </div>
+        </div>
+
+        <!-- Slide 2: 时代变化 -->
+        <div class="slide" data-index="2">
+            <div class="flex items-center gap-4 mb-10">
+                <span class="mono px-2 py-1 bg-black text-white">01 // Market Shift</span>
+                <div class="h-[1px] flex-grow bg-gray-300"></div>
+            </div>
+            <h2 class="text-6xl font-bold mb-8">AI 正在从“聊天”走向“执行”。</h2>
+            <div class="flex gap-12">
+                <div class="w-2/3">
+                    <p class="text-xl serif text-gray-700 leading-relaxed mb-8">
+                        一旦 AI 开始执行任务，它每一步都要先知道：该看什么数据？该相信哪份文件？哪些信息已经过期？
+                    </p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="debossed p-6">
+                            <p class="mono text-red-800 font-bold text-2xl">40%</p>
+                            <p class="text-xs text-gray-500 mt-2">Gartner: 2026 年企业应用集成 Agent 比例</p>
+                        </div>
+                        <div class="debossed p-6">
+                            <p class="mono text-red-800 font-bold text-2xl">88%</p>
+                            <p class="text-xs text-gray-500 mt-2">McKinsey: 组织已在业务中使用生成式 AI</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-1/3 flex justify-center pt-8">
+                    <div class="sticky-note">
+                        <p class="handwriting text-black">Agent 越会执行，搜索越成为行动的前置条件。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: 核心洞察 -->
+        <div class="slide" data-index="3">
+            <h2 class="text-5xl font-bold mb-10 text-center">AI 的瓶颈正在从模型转向信息调用</h2>
+            <div class="debossed p-12 flex-grow grid grid-cols-2 gap-12">
+                <div class="border-r border-dashed border-gray-300 pr-12">
+                    <p class="mono text-blue-900 mb-4">Training Side → Cognition</p>
+                    <p class="text-lg serif leading-relaxed">
+                        训练侧解决了“认知能力”。Scaling Law 让模型越来越聪明，但它本质上不拥有用户数据。
+                    </p>
+                </div>
+                <div>
+                    <p class="mono text-red-900 mb-4">Application Side → Truth</p>
+                    <p class="text-lg serif leading-relaxed">
+                        应用侧决定了“信息调用”。Agent 执行任务时，结果质量取决于能否找到那条真相。
+                    </p>
+                </div>
+                <div class="col-span-2 text-center pt-10 border-t border-gray-100">
+                    <p class="text-2xl italic serif">"Intelligence without information is a hallucination."</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: 痛点 -->
+        <div class="slide" data-index="4">
+            <h2 class="text-5xl font-bold mb-12">“相关”不够，AI 要找的是那一条真相</h2>
+            <div class="grid grid-cols-3 gap-6 flex-grow">
+                <div class="debossed p-8 space-y-4">
+                    <p class="mono">Pain 01</p>
+                    <h3 class="font-bold text-xl">找不到“那一条”</h3>
+                    <p class="text-sm text-gray-500">搜索结果差不多，但不是 Agent 真正需要引用的那份。</p>
+                </div>
+                <div class="debossed p-8 space-y-4">
+                    <p class="mono">Pain 02</p>
+                    <h3 class="font-bold text-xl">模态信息丢失</h3>
+                    <p class="text-sm text-gray-500">PDF 里的图表、图片里的文字在传统索引中往往被忽略。</p>
+                </div>
+                <div class="debossed p-8 space-y-4">
+                    <p class="mono">Pain 03</p>
+                    <h3 class="font-bold text-xl">验证税过高</h3>
+                    <p class="text-sm text-gray-500">如果结果需要人工 100% 核对，AI 就在增加负担而不是节省时间。</p>
+                </div>
+            </div>
+            <div class="mt-8 flex justify-end">
+                <div class="stamp">Verification Tax Reduction</div>
+            </div>
+        </div>
+
+        <!-- Slide 5: RAG vs Ultrafilter -->
+        <div class="slide" data-index="5">
+            <h2 class="text-4xl font-bold mb-10">RAG 和向量数据库只是部件，不是产品</h2>
+            <div class="flex-grow">
+                <table class="w-full border-collapse">
+                    <thead>
+                        <tr class="mono border-b-2 border-black text-left">
+                            <th class="py-4">维度</th>
+                            <th class="py-4">现有方案 (Vector DB/RAG)</th>
+                            <th class="py-4 font-bold text-black">Ultrafilter Search API</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-sm serif">
+                        <tr class="border-b border-gray-200">
+                            <td class="py-4 font-bold">接入成本</td>
+                            <td class="py-4 text-gray-500">需自建 Pipeline (Chunk/Sync)</td>
+                            <td class="py-4 font-bold">连接 Bucket 自动 Mapping</td>
+                        </tr>
+                        <tr class="border-b border-gray-200">
+                            <td class="py-4 font-bold">搜索逻辑</td>
+                            <td class="py-4 text-gray-500">单一相似度检索</td>
+                            <td class="py-4 font-bold">Time-Cone + 场景化多模态</td>
+                        </tr>
+                        <tr class="border-b border-gray-200">
+                            <td class="py-4 font-bold">同步状态</td>
+                            <td class="py-4 text-gray-500">易过期，缺乏源文件追踪</td>
+                            <td class="py-4 font-bold">Preview-first 状态实时同步</td>
+                        </tr>
+                        <tr>
+                            <td class="py-4 font-bold">长期记忆</td>
+                            <td class="py-4 text-gray-500">无状态，Query 孤立</td>
+                            <td class="py-4 font-bold">Memory Trace 记录“已用”历史</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Slide 6: 解决方案 -->
+        <div class="slide" data-index="6">
+            <h2 class="text-5xl font-bold mb-10 text-center">把私有数据变成可靠的搜索 API</h2>
+            <div class="flex-grow flex items-center justify-center">
+                <div class="flex items-center gap-4">
+                    <div class="debossed p-6 text-center w-36"><p class="mono text-xs">Bucket / Folder</p></div>
+                    <div class="text-xl">→</div>
+                    <div class="debossed p-6 text-center w-36 bg-black text-white"><p class="mono text-xs">Search Planner</p></div>
+                    <div class="text-xl">→</div>
+                    <div class="debossed p-6 text-center w-36"><p class="mono text-xs">Agent API</p></div>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-12 mt-12">
+                <div class="border-l-4 border-black pl-6">
+                    <p class="font-bold mb-2">We do not sell models.</p>
+                    <p class="text-sm text-gray-600">我们不卖 AI 的聪明。我们卖的是把关键私有信息稳定取出来的确定性。</p>
+                </div>
+                <div class="border-l-4 border-black pl-6">
+                    <p class="font-bold mb-2">Infrastructure First.</p>
+                    <p class="text-sm text-gray-600">消除数据接入、索引、同步、校验之间的工程负担。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: 产品体验 -->
+        <div class="slide" data-index="7">
+            <h2 class="text-4xl font-bold mb-10">两步接入，自动搭建私有搜索系统</h2>
+            <div class="grid grid-cols-2 gap-10">
+                <div class="space-y-8">
+                    <div class="flex gap-4">
+                        <div class="mono bg-black text-white w-8 h-8 flex items-center justify-center">01</div>
+                        <div>
+                            <p class="font-bold">选择场景与连接数据</p>
+                            <p class="text-sm text-gray-500 mt-1">连接 S3/R2 Bucket 或上传本地文件夹。</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="mono bg-black text-white w-8 h-8 flex items-center justify-center">02</div>
+                        <div>
+                            <p class="font-bold">预览同步并获取 API</p>
+                            <p class="text-sm text-gray-500 mt-1">系统自动映射 Schema，预览影响后一键生效。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="debossed bg-black text-green-400 p-8 font-mono text-[10px] space-y-2 overflow-hidden">
+                    <p>> ultrafilter init project-X</p>
+                    <p>> [Detected] 6,240 text files, 920 images, 182 PDFs</p>
+                    <p>> [Action] Auto-mapping schema... Done.</p>
+                    <p>> Endpoint ready: api.ultrafilter.ai/v1/search</p>
+                    <div class="mt-4 pt-2 border-t border-green-900 text-white">
+                        curl -X POST ... -d '{"query": "last report on alpha project"}'
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: 产品闭环 -->
+        <div class="slide" data-index="8">
+            <h2 class="text-5xl font-bold mb-10">核心产品闭环已经跑通</h2>
+            <div class="grid grid-cols-4 gap-4 flex-grow">
+                <div class="debossed p-6 text-center">
+                    <p class="mono text-gray-400 mb-2">Dashboard</p>
+                    <p class="text-xs">已完成 Onboarding、Billing 与 API 管理</p>
+                </div>
+                <div class="debossed p-6 text-center">
+                    <p class="mono text-gray-400 mb-2">Connectors</p>
+                    <p class="text-xs">支持 S3/R2 与 Local 文件夹无缝接入</p>
+                </div>
+                <div class="debossed p-6 text-center">
+                    <p class="mono text-gray-400 mb-2">Sync Engine</p>
+                    <p class="text-xs">Preview-first 增量同步与索引状态维护</p>
+                </div>
+                <div class="debossed p-6 text-center">
+                    <p class="mono text-gray-400 mb-2">Search API</p>
+                    <p class="text-xs">支持 Text/Image/PDF 多模态混合检索</p>
+                </div>
+            </div>
+            <div class="mt-12 flex justify-center">
+                <div class="stamp">Working Prototype Ready</div>
+            </div>
+        </div>
+
+        <!-- Slide 9: 场景化多模态 -->
+        <div class="slide" data-index="9">
+            <h2 class="text-4xl font-bold mb-10">场景化搜索：不同形态，不同路径</h2>
+            <div class="grid grid-cols-2 gap-10">
+                <div class="space-y-6">
+                    <div class="border-l-4 border-blue-900 pl-4 py-2">
+                        <p class="font-bold">Text Mode</p>
+                        <p class="text-sm text-gray-500">语义检索 + 关键词 + 时间线索。</p>
+                    </div>
+                    <div class="border-l-4 border-green-800 pl-4 py-2">
+                        <p class="font-bold">Image Mode</p>
+                        <p class="text-sm text-gray-500">基于视觉 Embedding 的相似度搜索。</p>
+                    </div>
+                    <div class="border-l-4 border-red-800 pl-4 py-2">
+                        <p class="font-bold">PDF Mode</p>
+                        <p class="text-sm text-gray-500">Page-level 细粒度检索，支持文本/布局识别。</p>
+                    </div>
+                </div>
+                <div class="debossed flex flex-col items-center justify-center p-8">
+                    <div class="mono text-gray-400 mb-6">Unified Search Planner</div>
+                    <div class="w-full space-y-2">
+                        <div class="h-2 bg-gray-200 w-full"></div>
+                        <div class="h-2 bg-gray-200 w-3/4"></div>
+                        <div class="h-2 bg-black w-1/2"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Time-Cone Search -->
+        <div class="slide" data-index="10">
+            <h2 class="text-5xl font-bold mb-10">Time-Cone Search<br><span class="text-2xl serif text-gray-500">像人类记忆一样搜索：先局部，再扩展</span></h2>
+            <div class="flex gap-16 items-center flex-grow">
+                <div class="cone">
+                    <div class="cone-layer" style="width: 300px; height: 50px;">ALL DATA</div>
+                    <div class="cone-layer" style="width: 200px; height: 40px;">7 DAYS</div>
+                    <div class="cone-layer" style="width: 100px; height: 30px; background: black; color: white; border: none;">NOW</div>
+                </div>
+                <div class="w-1/2 space-y-4">
+                    <p class="text-lg serif italic">把时间记忆变成搜索空间压缩。</p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>• 理解 <b>observed_at</b> 的局部性</li>
+                        <li>• 候选集从 100,000 压缩到前 48 小时</li>
+                        <li>• 更快、更准、更自然</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: Memory Trace -->
+        <div class="slide" data-index="11">
+            <h2 class="text-5xl font-bold mb-8 text-center">Memory Trace</h2>
+            <h3 class="text-2xl serif text-center text-gray-500 mb-12">从一次性检索，到可积累的记忆</h3>
+            <div class="grid grid-cols-2 gap-12 flex-grow">
+                <div class="debossed p-8 flex flex-col justify-center">
+                    <p class="text-sm mb-4 font-bold">记录 Agent 与结果的每一次互动：</p>
+                    <div class="grid grid-cols-3 gap-2">
+                        <div class="mono border border-black p-2 text-center text-[8px]">returned</div>
+                        <div class="mono border border-black p-2 text-center text-[8px]">opened</div>
+                        <div class="mono border border-black p-2 text-center text-[8px]">used</div>
+                        <div class="mono border border-black p-2 text-center text-[8px]">cited</div>
+                        <div class="mono border border-black p-2 text-center text-[8px]">dismissed</div>
+                        <div class="mono border border-black p-2 text-center text-[8px]">confirmed</div>
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    <div class="sticky-note w-full">
+                        <p class="handwriting">"用户一旦沉淀了 Mapping 和 Memory Trace，迁移成本会持续上升。"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: 共享状态 -->
+        <div class="slide" data-index="12">
+            <h2 class="text-4xl font-bold mb-10 text-center">人和 Agent 共用一套项目状态</h2>
+            <div class="flex-grow flex items-center justify-around">
+                <div class="text-center space-y-4">
+                    <div class="w-32 h-40 debossed flex items-center justify-center p-4 mono">Dashboard<br>(Human)</div>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="bg-black text-white px-6 py-2 mono mb-2">Shared Backend</div>
+                    <div class="text-[10px] text-gray-400 text-center">Project / API Key / Connector / Sync History</div>
+                </div>
+                <div class="text-center space-y-4">
+                    <div class="w-32 h-40 debossed flex items-center justify-center p-4 mono">CLI / API<br>(Agent)</div>
+                </div>
+            </div>
+            <div class="mt-8 p-6 border-l-4 border-black text-sm">
+                人可以在 Dashboard 维护数据源，Agent 无感继续同步；Agent 的任务状态，人可以实时校验。无状态割裂。
+            </div>
+        </div>
+
+        <!-- Slide 13: 市场入口 -->
+        <div class="slide" data-index="13">
+            <h2 class="text-5xl font-bold mb-10">切入口：正在给 Agent 接私有数据的人</h2>
+            <div class="grid grid-cols-2 gap-10">
+                <div class="space-y-6">
+                    <h3 class="font-bold border-b border-black pb-2">Phase 1: AI Builders</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        AI Agent 开发者、RAG 创业团队、数据密集型个人（研究员、顾问）。他们懂 API，有数据，想省事。
+                    </p>
+                </div>
+                <div class="space-y-6">
+                    <h3 class="font-bold border-b border-black pb-2">Phase 2: Enterprise Workflow</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        企业 AI 应用团队、SaaS 厂商、AI 集成商。他们需要规模化接入、安全审计和定制 Mapping。
+                    </p>
+                </div>
+            </div>
+            <div class="mt-16 flex justify-center">
+                <div class="stamp">Go-To-Market Ready</div>
+            </div>
+        </div>
+
+        <!-- Slide 14: 市场时机 -->
+        <div class="slide" data-index="14">
+            <h2 class="text-5xl font-bold mb-10">AI 基础设施进入长期建设周期</h2>
+            <div class="grid grid-cols-3 gap-6 flex-grow">
+                <div class="debossed p-8 text-center">
+                    <p class="text-4xl font-bold mb-2">$318B</p>
+                    <p class="mono text-[10px]">2025 全球 AI 基础设施支出 (IDC)</p>
+                </div>
+                <div class="debossed p-8 text-center">
+                    <p class="text-4xl font-bold mb-2">$1T+</p>
+                    <p class="mono text-[10px]">2029 市场规模预测 (IDC)</p>
+                </div>
+                <div class="debossed p-8 text-center">
+                    <p class="text-4xl font-bold mb-2">88%</p>
+                    <p class="mono text-[10px]">组织已将 AI 深度集成至业务 (McKinsey)</p>
+                </div>
+            </div>
+            <div class="mt-12 p-8 bg-black text-white text-center">
+                <p class="text-xl serif italic">"资本不再只为概念买单，而会寻找能支撑 AI 进入生产环境的底座。"</p>
+            </div>
+        </div>
+
+        <!-- Slide 15: 商业模式 -->
+        <div class="slide" data-index="15">
+            <h2 class="text-4xl font-bold mb-10">API-first 商业模式</h2>
+            <div class="grid grid-cols-3 gap-6 flex-grow">
+                <div class="border border-black p-6 space-y-4">
+                    <p class="mono">Developer</p>
+                    <p class="text-2xl font-bold">Free / PayG</p>
+                    <p class="text-xs text-gray-500">个人知识库，低频同步。</p>
+                </div>
+                <div class="bg-black text-white p-6 space-y-4 shadow-xl transform -translate-y-4">
+                    <p class="mono text-gray-400">Team Pro</p>
+                    <p class="text-2xl font-bold">$500+ / mo</p>
+                    <p class="text-xs text-gray-300">团队共享状态，高频同步，Time-Cone Search。</p>
+                </div>
+                <div class="border border-black p-6 space-y-4">
+                    <p class="mono">Enterprise</p>
+                    <p class="text-2xl font-bold">Custom</p>
+                    <p class="text-xs text-gray-500">定制 Mapping，安全审计，私有部署选项。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 16: 竞争定位 -->
+        <div class="slide" data-index="16">
+            <h2 class="text-5xl font-bold mb-10">Not another Vector Database.</h2>
+            <div class="debossed p-12">
+                <div class="grid grid-cols-2 gap-16">
+                    <div>
+                        <p class="mono mb-4">Vector DBs (Pinecone/Milvus)</p>
+                        <p class="text-sm font-bold text-red-800">解决“相似”</p>
+                        <p class="text-sm text-gray-500 mt-2">开发者需自建 Pipeline</p>
+                    </div>
+                    <div>
+                        <p class="mono mb-4">Ultrafilter Search API</p>
+                        <p class="text-sm font-bold text-red-800">解决“可用”</p>
+                        <p class="text-sm text-gray-500 mt-2">直接交付搜索服务</p>
+                    </div>
+                </div>
+                <div class="mt-12 text-center border-t border-gray-200 pt-8">
+                    <p class="text-xl serif italic">"We are the product layer between data and agents."</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 17: 合作生态 -->
+        <div class="slide" data-index="17">
+            <h2 class="text-4xl font-bold mb-10">成为 AI 产品背后的检索层</h2>
+            <div class="grid grid-cols-3 gap-6">
+                <div class="debossed p-6 space-y-2">
+                    <h3 class="font-bold text-sm">Agent Companies</h3>
+                    <p class="text-xs text-gray-500">他们负责 Agent Experience，我们负责 Private Search Layer。</p>
+                </div>
+                <div class="debossed p-6 space-y-2">
+                    <h3 class="font-bold text-sm">SaaS Companies</h3>
+                    <p class="text-xs text-gray-500">我们将他们现有的数据资产一键转化为 AI-native 搜索接口。</p>
+                </div>
+                <div class="debossed p-6 space-y-2">
+                    <h3 class="font-bold text-sm">Cloud Providers</h3>
+                    <p class="text-xs text-gray-500">让 Bucket / Folder 变成天然可搜索的 Memory。</p>
+                </div>
+            </div>
+            <div class="mt-auto flex justify-center pb-8">
+                <p class="handwriting">"Agent companies should not rebuild private search from scratch."</p>
+            </div>
+        </div>
+
+        <!-- Slide 18: 护城河 -->
+        <div class="slide" data-index="18">
+            <h2 class="text-5xl font-bold mb-8">护城河：复利式留存</h2>
+            <div class="grid grid-cols-2 gap-4 flex-grow">
+                <div class="debossed p-6 flex gap-4 items-center">
+                    <div class="w-10 h-10 bg-black text-white flex items-center justify-center mono">01</div>
+                    <p class="text-sm"><b>数据沉淀：</b> 接入量级决定迁移成本。</p>
+                </div>
+                <div class="debossed p-6 flex gap-4 items-center">
+                    <div class="w-10 h-10 bg-black text-white flex items-center justify-center mono">02</div>
+                    <p class="text-sm"><b>Mapping 沉淀：</b> 专属数据结构的编译逻辑。</p>
+                </div>
+                <div class="debossed p-6 flex gap-4 items-center">
+                    <div class="w-10 h-10 bg-black text-white flex items-center justify-center mono">03</div>
+                    <p class="text-sm"><b>Sync 沉淀：</b> 索引与源文件的一致性信任。</p>
+                </div>
+                <div class="debossed p-6 flex gap-4 items-center">
+                    <div class="w-10 h-10 bg-black text-white flex items-center justify-center mono">04</div>
+                    <p class="text-sm"><b>Memory Trace：</b> “越用越懂”的用户状态历史。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 19: 里程碑 -->
+        <div class="slide" data-index="19">
+            <h2 class="text-4xl font-bold mb-10">里程碑：从产品闭环到基础设施</h2>
+            <div class="space-y-8 flex-grow">
+                <div class="flex gap-10">
+                    <div class="mono w-32 border-r border-black">NOW</div>
+                    <p class="text-sm text-gray-700">核心 Loop 跑通，支持多模态搜索与 Dashboard/CLI 共享状态。</p>
+                </div>
+                <div class="flex gap-10">
+                    <div class="mono w-32 border-r border-black">6 MONTHS</div>
+                    <p class="text-sm text-gray-700">Time-Cone MVP，接入 10-20 个设计伙伴，完成 Auto Mapping 进阶版。</p>
+                </div>
+                <div class="flex gap-10">
+                    <div class="mono w-32 border-r border-black">12 MONTHS</div>
+                    <p class="text-sm text-gray-700">100+ 活跃索引项目，验证高频行业场景，建立标准化 Search Benchmark。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 20: 融资需求 -->
+        <div class="slide" data-index="20">
+            <h2 class="text-5xl font-bold mb-10">融资需求</h2>
+            <div class="grid grid-cols-2 gap-12 flex-grow items-center">
+                <div class="space-y-6">
+                    <p class="text-xl serif italic">将已跑通的检索底座，打磨成可规模化交付的基础设施。</p>
+                    <div class="debossed p-8 mono text-xs space-y-2">
+                        <p>50% Engineering & Product</p>
+                        <p>20% AI & Search Infrastructure Costs</p>
+                        <p>20% Design Partners & GTM</p>
+                        <p>10% Security, Ops & Compliance</p>
+                    </div>
+                </div>
+                <div class="flex justify-center">
+                    <div class="stamp scale-150">Funding Required</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 21: 结尾 -->
+        <div class="slide" data-index="21">
+            <div class="flex-grow flex flex-col justify-center items-center text-center">
+                <h2 class="text-4xl serif italic mb-8">
+                    Public search connected humans to the web.<br>
+                    Private search will connect agents to our data.
+                </h2>
+                <div class="h-[2px] bg-black w-40 mb-10"></div>
+                <h1 class="text-6xl font-bold mb-8">Ultrafilter</h1>
+                <p class="text-xl serif">我们不卖 AI 的聪明。我们卖的是取回真相的确定性。</p>
+            </div>
+            <div class="mt-auto border-t border-black pt-6 flex justify-between mono">
+                <div>CONTACT@ULTRAFILTER.AI</div>
+                <div>ULTRAFILTER FOUNDATION © 2024</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 导航栏 -->
+    <div class="nav-controls" id="navControls"></div>
+
+    <script>
+        const totalSlides = 21;
+        let currentSlide = 1;
+
+        function initNav() {
+            const nav = document.getElementById('navControls');
+            for (let i = 1; i <= totalSlides; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'nav-dot';
+                dot.id = `dot-${i}`;
+                dot.onclick = () => showSlide(i);
+                nav.appendChild(dot);
+            }
+            updateDots();
+        }
+
+        function showSlide(index) {
+            if (index < 1 || index > totalSlides) return;
+            document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+            document.querySelector(`.slide[data-index="${index}"]`).classList.add('active');
+            currentSlide = index;
+            document.getElementById('pageNum').innerText = `${String(currentSlide).padStart(2, '0')} / ${totalSlides}`;
+            updateDots();
+        }
+
+        function updateDots() {
+            document.querySelectorAll('.nav-dot').forEach(d => d.classList.remove('active'));
+            const activeDot = document.getElementById(`dot-${currentSlide}`);
+            if (activeDot) activeDot.classList.add('active');
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') showSlide(currentSlide + 1);
+            if (e.key === 'ArrowLeft') showSlide(currentSlide - 1);
+        });
+
+        window.onload = initNav;
+    </script>
+</body>
+</html>

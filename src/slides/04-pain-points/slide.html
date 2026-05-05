@@ -1,0 +1,141 @@
+            <div class="pipeline-layout">
+                <!-- Global Marker -->
+                <div class="flex justify-end mb-6">
+                    <div class="page-marker">基础设施缺口 // THE INFRA GAP</div>
+                </div>
+
+                <div class="pipeline-grid">
+                    <!-- Left: The Master Pipeline -->
+                    <div class="pipeline-col anim-fade-in">
+                        <div class="pipeline-header">
+                            <span class="mono text-[10px] text-red-800 font-bold">THE MASTER PIPELINE</span>
+                            <h3 class="text-xl font-bold mt-1">Agent-ready data 生产线</h3>
+                        </div>
+                        
+                        <div class="pipeline-track-container mt-8">
+                            <div class="pipeline-track"></div>
+                            <div class="pipeline-steps">
+                                <div class="step-node anim-fade-up" style="animation-delay: 0.1s;">
+                                    <div class="node-icon">01</div>
+                                    <div class="node-content">
+                                        <span class="node-title">连接 <span class="mono">CONNECT</span></span>
+                                        <span class="node-desc">连接原始私有数据源</span>
+                                    </div>
+                                </div>
+                                <div class="step-node anim-fade-up" style="animation-delay: 0.2s;">
+                                    <div class="node-icon">02</div>
+                                    <div class="node-content">
+                                        <span class="node-title">转化 <span class="mono">TRANSFORM</span></span>
+                                        <span class="node-desc">解析、清洗、转化为上下文</span>
+                                    </div>
+                                </div>
+                                <div class="step-node anim-fade-up" style="animation-delay: 0.3s;">
+                                    <div class="node-icon">03</div>
+                                    <div class="node-content">
+                                        <span class="node-title">治理 <span class="mono">GOVERN</span></span>
+                                        <span class="node-desc">权限继承、时间与版本管理</span>
+                                    </div>
+                                </div>
+                                <div class="step-node anim-fade-up" style="animation-delay: 0.4s;">
+                                    <div class="node-icon">04</div>
+                                    <div class="node-content">
+                                        <span class="node-title">检索 <span class="mono">RETRIEVE</span></span>
+                                        <span class="node-desc">多模态索引与事实检索</span>
+                                    </div>
+                                </div>
+                                <div class="step-node anim-fade-up" style="animation-delay: 0.5s;">
+                                    <div class="node-icon">05</div>
+                                    <div class="node-content">
+                                        <span class="node-title">评估 <span class="mono">EVALUATE</span></span>
+                                        <span class="node-desc">质量评估、来源引用与溯源</span>
+                                    </div>
+                                </div>
+                                <div class="step-node anim-fade-up" style="animation-delay: 0.6s;">
+                                    <div class="node-icon">06</div>
+                                    <div class="node-content">
+                                        <span class="node-title">执行 <span class="mono">ACT</span></span>
+                                        <span class="node-desc">工具调用与行动审计</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pipeline-local-insight anim-fade-up" style="animation-delay: 1.3s;">
+                            <svg class="handwritten-arrow" viewBox="0 0 50 28">
+                                <path d="M 3,3 Q 14,20 36,19" fill="none" stroke="var(--ink-blue)" stroke-width="1.7" stroke-linecap="round" />
+                                <path d="M 29,13 L 39,19 L 29,25" fill="none" stroke="var(--ink-blue)" stroke-width="1.7" stroke-linecap="round" />
+                            </svg>
+                            <div class="insight-highlight">
+                                <p class="handwriting text-blue-900">
+                                    “企业需要一条新的生产线：把原始私有数据持续炼成 Agent-ready data”
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Gap Matrix -->
+                    <div class="matrix-col">
+                        <div class="matrix-header anim-fade-up" style="animation-delay: 0.1s;">
+                            <h2 class="text-4xl font-bold tracking-tighter">现有方案停在部件层，<br>Agent 需要完整链路</h2>
+                            <p class="text-sm text-gray-500 mt-3 leading-relaxed">
+                                RAG、向量数据库、企业搜索和知识库各自解决一段问题；<br>
+                                企业需要持续把私有数据转化为可授权、可验证、可执行的上下文。
+                            </p>
+                        </div>
+
+                        <div class="gap-matrix mt-8">
+                            <!-- Card 1: RAG -->
+                            <div class="gap-card debossed anim-fade-up" style="animation-delay: 0.7s;">
+                                <div class="card-head">
+                                    <span class="card-title">RAG</span>
+                                    <a href="https://arxiv.org/abs/2005.11401" target="_blank" class="source-tag">ref [16]</a>
+                                </div>
+                                <div class="card-body">
+                                    <div class="item"><strong>覆盖：</strong> 检索 + 生成</div>
+                                    <div class="item text-red-800"><strong>缺口：</strong> 权限、版本、状态、工具调用、审计</div>
+                                    <div class="item italic text-gray-400">风险：回答看似完整，依据可能不稳</div>
+                                </div>
+                            </div>
+                            <!-- Card 2: Vector DB -->
+                            <div class="gap-card debossed anim-fade-up" style="animation-delay: 0.8s;">
+                                <div class="card-head">
+                                    <span class="card-title">向量数据库</span>
+                                </div>
+                                <div class="card-body">
+                                    <div class="item"><strong>覆盖：</strong> embedding 存储 + 相似检索</div>
+                                    <div class="item text-red-800"><strong>缺口：</strong> 原始治理、业务正确性、动态同步</div>
+                                    <div class="item italic text-gray-400">风险：找到相似内容，仍缺可执行上下文</div>
+                                </div>
+                            </div>
+                            <!-- Card 3: Enterprise Search -->
+                            <div class="gap-card debossed anim-fade-up" style="animation-delay: 0.9s;">
+                                <div class="card-head">
+                                    <span class="card-title">企业搜索</span>
+                                </div>
+                                <div class="card-body">
+                                    <div class="item"><strong>覆盖：</strong> 员工查文档</div>
+                                    <div class="item text-red-800"><strong>缺口：</strong> Agent 多步任务、工具调用、运行时状态</div>
+                                    <div class="item italic text-gray-400">风险：人能查，Agent 难以连续执行</div>
+                                </div>
+                            </div>
+                            <!-- Card 4: Knowledge Base -->
+                            <div class="gap-card debossed anim-fade-up" style="animation-delay: 1.0s;">
+                                <div class="card-head">
+                                    <span class="card-title">知识库 / Wiki</span>
+                                </div>
+                                <div class="card-body">
+                                    <div class="item"><strong>覆盖：</strong> 人工沉淀知识</div>
+                                    <div class="item text-red-800"><strong>缺口：</strong> 维护成本、新鲜度、动态业务事件</div>
+                                    <div class="item italic text-gray-400">风险：静态知识可用，动态上下文不足</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p class="text-xs mt-6 text-gray-400 leading-relaxed anim-fade-in" style="animation-delay: 1.1s;">
+                            链路断在任意一环，Agent 都可能拿到“看起来相关”的内容，却无法稳定进入真实业务流程。
+                            Agent-ready data 不是一次检索动作，而是一条持续运行的数据转化链路。
+                        </p>
+                    </div>
+                </div>
+
+            </div>

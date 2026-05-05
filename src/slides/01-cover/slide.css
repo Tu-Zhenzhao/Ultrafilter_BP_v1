@@ -1,0 +1,128 @@
+/* Slide 01: 封面 - 现代社论排版 (Modern Editorial) */
+
+.editorial-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 0 10px;
+  width: 100%;
+}
+
+.editorial-header {
+  margin-bottom: 50px;
+}
+
+.title-main {
+  font-size: 5.5rem;
+  line-height: 1;
+}
+
+.logo-playful {
+  animation: playful-bounce 2s ease-in-out infinite;
+  mix-blend-mode: multiply;
+  transform: rotate(30deg);
+  width: 80px;
+}
+
+@keyframes playful-bounce {
+  0%, 100% { transform: rotate(30deg) translateY(0); }
+  50% { transform: rotate(35deg) translateY(-15px); }
+}
+
+/* Grid System */
+.editorial-grid {
+  display: grid;
+  flex-grow: 1;
+  gap: 60px;
+  grid-template-columns: 1.5fr 1fr;
+}
+
+.logic-column {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.step-group {
+  padding-left: 10px;
+}
+
+.step-group-debossed {
+  padding: 30px;
+}
+
+.step-index {
+  color: var(--ink-grey);
+  display: block;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  margin-bottom: 10px;
+  opacity: 0.6;
+}
+
+.editorial-divider {
+  background: var(--ink-grey);
+  height: 1px;
+  margin-left: 10px;
+  opacity: 0.15;
+  width: 60px;
+}
+
+/* Right Feature Column */
+.feature-column {
+  border-left: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 20px;
+  padding-left: 40px;
+  position: relative;
+}
+
+.index-list {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  position: relative;
+  z-index: 2;
+}
+
+.flow-arrow {
+  height: 80px;
+  left: 120px;
+  opacity: 0.5;
+  pointer-events: none;
+  position: absolute;
+  top: 55%;
+  width: 100px;
+  z-index: 1;
+}
+
+.index-item {
+  align-items: baseline;
+  display: flex;
+  gap: 15px;
+}
+
+.index-num {
+  color: var(--ink-grey);
+  font-size: 0.8rem;
+  opacity: 0.4;
+}
+
+.index-text {
+  font-family: "Noto Serif SC", serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.handwriting-anchor {
+  padding-top: 10px;
+  position: relative;
+  z-index: 2;
+}
+
+.ink-focus {
+  border-bottom: 2px solid var(--ink-black);
+  font-weight: 600;
+}
