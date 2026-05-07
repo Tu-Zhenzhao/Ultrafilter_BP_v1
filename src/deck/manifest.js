@@ -1,4 +1,4 @@
-export const slides = [
+export const allSlides = [
   { index: 1, slug: "01-cover", title: "封面" },
   { index: 2, slug: "02-market-shift", title: "时代变化" },
   { index: 3, slug: "03-core-insight", title: "核心洞察" },
@@ -20,3 +20,39 @@ export const slides = [
   { index: 19, slug: "19-funding", title: "融资需求" },
   { index: 20, slug: "20-closing", title: "结尾" }
 ];
+
+// Code-only publication controls.
+// - visibleThrough: only show physical slides up to this number. Set to null to disable.
+// - hiddenSlides: hide individual physical slide numbers or slugs.
+// - onlySlides: optional allowlist of physical slide numbers or slugs. Leave empty to disable.
+// Examples:
+//   hiddenSlides: [5]
+//   hiddenSlides: ["05-solution", "17-moat"]
+//   onlySlides: [1, 2, 3, "11-market-timing", "13-ecosystem"]
+// The exported slides are re-numbered for navigation and page labels.
+export const publication = {
+  visibleThrough: 13,
+  hiddenSlides: [],
+  onlySlides: [],
+};
+
+export const slides = createVisibleSlides(allSlides, publication);
+
+function createVisibleSlides(sourceSlides, { visibleThrough = null, hiddenSlides = [], onlySlides = [] } = {}) {
+  const hidden = new Set(hiddenSlides.map(String));
+  const only = new Set(onlySlides.map(String));
+
+  return sourceSlides
+    .filter((slide) => {
+      const isOutsideAllowlist = only.size > 0 && !only.has(String(slide.index)) && !only.has(slide.slug);
+      const isAfterVisibleRange = visibleThrough !== null && slide.index > visibleThrough;
+      const isHidden = hidden.has(String(slide.index)) || hidden.has(slide.slug);
+
+      return !isOutsideAllowlist && !isAfterVisibleRange && !isHidden;
+    })
+    .map((slide, visibleIndex) => ({
+      ...slide,
+      physicalIndex: slide.index,
+      index: visibleIndex + 1,
+    }));
+}

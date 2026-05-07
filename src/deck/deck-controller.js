@@ -18,13 +18,14 @@ export class DeckController {
           cache: "no-store",
         });
         if (!response.ok) {
-          console.error(`Unable to load slide ${slide.index}: ${slide.slug}`);
+          console.error(`Unable to load slide ${slide.physicalIndex ?? slide.index}: ${slide.slug}`);
           return this.createMissingSlide(slide, response.status);
         }
 
         const section = document.createElement("section");
         section.className = "slide";
         section.dataset.index = String(slide.index);
+        section.dataset.physicalIndex = String(slide.physicalIndex ?? slide.index);
         section.dataset.slug = slide.slug;
         section.dataset.pageLabel = `${String(slide.index).padStart(2, "0")} / ${this.slides.length}`;
         section.setAttribute("aria-label", `${String(slide.index).padStart(2, "0")} ${slide.title}`);
@@ -49,6 +50,7 @@ export class DeckController {
     const section = document.createElement("section");
     section.className = "slide";
     section.dataset.index = String(slide.index);
+    section.dataset.physicalIndex = String(slide.physicalIndex ?? slide.index);
     section.dataset.slug = slide.slug;
     section.dataset.pageLabel = `${String(slide.index).padStart(2, "0")} / ${this.slides.length}`;
     section.setAttribute("aria-label", `${String(slide.index).padStart(2, "0")} ${slide.title}`);
