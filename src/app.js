@@ -3,7 +3,7 @@ import { DeckController } from "./deck/deck-controller.js?v=20260507-visible-sli
 import { bindExportPdf } from "./deck/export-pdf.js?v=20260507-ecosystem13";
 import { LanguageController } from "./deck/language.js?v=20260507-ecosystem13";
 import { ProgressController } from "./deck/progress.js?v=20260507-ecosystem13";
-import { bindResponsiveDeck } from "./deck/responsive-deck.js?v=20260507-ecosystem13";
+import { bindResponsiveDeck } from "./deck/responsive-deck.js?v=20260507-mobile-shell1";
 
 const deck = new DeckController({
   deckElement: document.getElementById("deck"),

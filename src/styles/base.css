@@ -20,6 +20,20 @@ body {
   overflow: hidden;
 }
 
+body.is-mobile-portrait {
+  align-items: flex-start;
+  justify-content: flex-start;
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: 14px 14px 88px;
+  -webkit-overflow-scrolling: touch;
+}
+
+body.is-mobile-landscape {
+  overflow: hidden;
+  padding: 0;
+}
+
 button {
   color: inherit;
   font: inherit;
@@ -54,6 +68,12 @@ h3,
   height: var(--scaled-slide-height);
   justify-content: center;
   width: var(--scaled-slide-width);
+}
+
+body.is-mobile-portrait .bp-shell {
+  align-items: flex-start;
+  flex: 0 0 auto;
+  justify-content: flex-start;
 }
 
 .slide-stage {

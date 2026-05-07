@@ -105,9 +105,16 @@
 
 @media (max-width: 760px) {
   .bp-toolbar {
+    backdrop-filter: blur(10px);
+    background: rgb(242 240 233 / 72%);
+    border: 1px solid rgb(0 0 0 / 10%);
+    border-radius: 999px;
+    bottom: 12px;
+    box-shadow: 0 10px 30px rgb(0 0 0 / 12%);
     justify-content: flex-start;
     left: 8px;
     max-width: none;
+    padding: 6px;
     right: 8px;
     transform: none;
     width: auto;
@@ -122,6 +129,40 @@
     min-width: 72px;
     overflow-x: auto;
   }
+
+  .control-btn {
+    border-radius: 999px;
+    font-size: 11px;
+    min-height: 36px;
+    padding: 8px 12px;
+  }
+
+  .nav-controls {
+    gap: 9px;
+    justify-content: center;
+  }
+
+  .nav-dot {
+    height: 9px;
+    min-width: 9px;
+    width: 9px;
+  }
+}
+
+body.is-mobile-landscape .bp-toolbar {
+  bottom: 8px;
+  max-width: min(760px, calc(100vw - 18px));
+}
+
+body.is-mobile-portrait .bp-toolbar {
+  bottom: 12px;
+  left: 10px;
+  right: 10px;
+}
+
+body.is-mobile-portrait .bp-toolbar .nav-controls {
+  justify-content: flex-start;
+  max-width: 34vw;
 }
 
 .control-btn {
