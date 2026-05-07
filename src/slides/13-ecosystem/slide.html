@@ -1,0 +1,207 @@
+<div class="ecosystem-layout">
+  <header class="ecosystem-hero">
+    <div>
+      <h2>合作生态｜成为 AI 应用背后的私有搜索层</h2>
+      <p class="ecosystem-subtitle">
+        AI 应用负责场景和交互，Ultrafilter 负责企业私有数据的同步、检索、权限、记忆和高精度召回。
+      </p>
+    </div>
+    <span class="ecosystem-page-marker">生态合作 // ECOSYSTEM</span>
+  </header>
+
+  <main class="ecosystem-map" aria-label="Ultrafilter 合作生态地图">
+    <svg class="ecosystem-field" viewBox="0 0 1100 384" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <filter id="ecosystemPaperGrain" x="-18%" y="-26%" width="136%" height="152%">
+          <feTurbulence baseFrequency="0.82" numOctaves="2" seed="13" type="fractalNoise" result="grain" />
+          <feColorMatrix in="grain" type="saturate" values="0" result="monoGrain" />
+          <feComponentTransfer in="monoGrain" result="softGrain">
+            <feFuncA type="table" tableValues="0 0.045" />
+          </feComponentTransfer>
+          <feBlend in="SourceGraphic" in2="softGrain" mode="multiply" />
+        </filter>
+        <linearGradient id="ecosystemFieldAgent" x1="550" x2="296" y1="192" y2="192" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#b7842d" stop-opacity="0.02" />
+          <stop offset="0.52" stop-color="#b7842d" stop-opacity="0.42" />
+          <stop offset="1" stop-color="#b7842d" stop-opacity="0.02" />
+        </linearGradient>
+        <linearGradient id="ecosystemFieldSaas" x1="550" x2="550" y1="192" y2="34" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#244f86" stop-opacity="0.02" />
+          <stop offset="0.5" stop-color="#244f86" stop-opacity="0.4" />
+          <stop offset="1" stop-color="#244f86" stop-opacity="0.02" />
+        </linearGradient>
+        <linearGradient id="ecosystemFieldIntegrator" x1="550" x2="550" y1="192" y2="348" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#9b2f2f" stop-opacity="0.02" />
+          <stop offset="0.5" stop-color="#9b2f2f" stop-opacity="0.38" />
+          <stop offset="1" stop-color="#9b2f2f" stop-opacity="0.02" />
+        </linearGradient>
+        <linearGradient id="ecosystemFieldData" x1="550" x2="804" y1="192" y2="192" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#2f4f4f" stop-opacity="0.02" />
+          <stop offset="0.5" stop-color="#2f4f4f" stop-opacity="0.39" />
+          <stop offset="1" stop-color="#2f4f4f" stop-opacity="0.02" />
+        </linearGradient>
+      </defs>
+      <g class="ecosystem-field-core" filter="url(#ecosystemPaperGrain)">
+        <ellipse class="paper-layer paper-layer-outer" cx="550" cy="192" rx="134" ry="78" />
+        <ellipse class="paper-layer paper-layer-mid" cx="550" cy="192" rx="102" ry="59" />
+        <ellipse class="paper-layer paper-layer-inner" cx="550" cy="192" rx="70" ry="40" />
+        <ellipse class="paper-layer paper-layer-core" cx="550" cy="192" rx="39" ry="23" />
+      </g>
+      <g class="ecosystem-field-paths">
+        <path class="field-agent" d="M550 192 C494 184 438 201 380 194 S324 186 294 196" />
+        <path class="field-saas" d="M550 192 C560 150 536 118 548 78 S566 42 552 26" />
+        <path class="field-integrator" d="M550 192 C538 230 564 266 552 306 S532 344 548 360" />
+        <path class="field-data" d="M550 192 C608 202 666 184 724 194 S780 203 808 190" />
+      </g>
+      <g class="ecosystem-field-accents">
+        <circle class="accent-agent" cx="486" cy="192" r="4" />
+        <circle class="accent-saas" cx="550" cy="142" r="4" />
+        <circle class="accent-integrator" cx="550" cy="242" r="4" />
+        <circle class="accent-data" cx="614" cy="192" r="4" />
+      </g>
+    </svg>
+
+    <svg class="ecosystem-links" viewBox="0 0 940 384" aria-hidden="true">
+      <defs>
+        <linearGradient id="ecosystemLinkBlue" x1="0" x2="1" y1="0" y2="0">
+          <stop offset="0" stop-color="#2f4f4f" stop-opacity="0.08" />
+          <stop offset="0.52" stop-color="#244f86" stop-opacity="0.45" />
+          <stop offset="1" stop-color="#b22222" stop-opacity="0.12" />
+        </linearGradient>
+      </defs>
+      <path class="ecosystem-link link-agent" d="M 360 164 C 320 104, 276 78, 314 52" />
+      <path class="ecosystem-link link-saas" d="M 580 164 C 624 104, 666 78, 626 52" />
+      <path class="ecosystem-link link-integrator" d="M 360 226 C 314 272, 278 302, 314 330" />
+      <path class="ecosystem-link link-data" d="M 580 226 C 628 272, 666 302, 626 330" />
+    </svg>
+
+    <section class="ecosystem-hub" aria-label="Ultrafilter 中心平台">
+      <div class="hub-shell">
+        <p class="mono">INFRASTRUCTURE HUB</p>
+        <h3>Ultrafilter</h3>
+        <strong>Enterprise Context API for AI Agents</strong>
+        <div class="hub-capabilities" aria-label="核心能力">
+          <span><b>Sync</b>企业数据同步</span>
+          <span><b>Search</b>私有多模态搜索</span>
+          <span><b>Memory</b>Time-Cone + Memory Trace</span>
+          <span><b>Expose</b>Agent Search API / MCP / SDK</span>
+        </div>
+      </div>
+    </section>
+
+    <article class="ecosystem-channel channel-agent">
+      <div class="channel-head">
+        <span class="channel-index mono">01</span>
+        <h3>Agent Builder / AI 工作流平台</h3>
+      </div>
+      <div class="channel-companies" aria-label="代表公司">
+        <span>Zapier Agents <a href="https://zapier.com/agents" target="_blank" class="source-tag" title="Zapier [1]">[1]</a></span>
+        <span>Workato <a href="https://docs.workato.com/agentic/agentic.html" target="_blank" class="source-tag" title="Workato Docs [3]">[3]</a></span>
+        <span>Dify <a href="https://dify.ai/blog/introducing-knowledge-pipeline" target="_blank" class="source-tag" title="Dify [7]">[7]</a></span>
+        <span>LangChain <a href="https://docs.langchain.com/oss/python/integrations/providers/all_providers" target="_blank" class="source-tag" title="LangChain [8]">[8]</a></span>
+        <span>n8n <a href="https://n8n.io/workflows/6538-company-knowledge-base-agent-rag/" target="_blank" class="source-tag" title="n8n [6]">[6]</a></span>
+        <span>CrewAI <a href="https://docs.crewai.com/en/concepts/memory" target="_blank" class="source-tag" title="CrewAI [9]">[9]</a></span>
+      </div>
+      <p class="channel-need">
+        这些平台负责编排工作流、工具调用和 Agent 编排；一旦接入真实公司数据，就会遇到检索、同步、权限、更新和上下文质量问题。
+      </p>
+      <div class="channel-evidence">
+        <span>Zapier: company knowledge + 8,000+ apps <a href="https://zapier.com/agents" target="_blank" class="source-tag" title="Zapier [1]">[1]</a></span>
+        <span>Workato: permission-aware knowledge bases <a href="https://www.workato.com/product-hub/agentic-ai-security-5-things-you-must-get-right-now/" target="_blank" class="source-tag" title="Workato Security [4]">[4]</a></span>
+        <span>Dify: agentic workflows + RAG pipelines <a href="https://dify.ai/blog/introducing-knowledge-pipeline" target="_blank" class="source-tag" title="Dify [7]">[7]</a></span>
+        <span>LangChain: 1000+ integrations <a href="https://docs.langchain.com/oss/python/integrations/providers/all_providers" target="_blank" class="source-tag" title="LangChain [8]">[8]</a></span>
+      </div>
+      <div class="channel-bottom">
+        <p><b>解决</b>把 Ultrafilter 做成它们的“企业知识搜索组件”，让用户在搭 Agent 时直接接入私有数据搜索</p>
+        <p><b>收入</b>Partner API，按工作区 / 数据记录 / 查询次数收费，年保底 + 用量</p>
+      </div>
+      <em>Agent 平台负责编排任务，Ultrafilter 提供企业上下文。</em>
+    </article>
+
+    <article class="ecosystem-channel channel-saas">
+      <div class="channel-head">
+        <span class="channel-index mono">02</span>
+        <h3>客服 / 销售 / 员工支持 SaaS</h3>
+      </div>
+      <div class="channel-companies" aria-label="代表公司">
+        <span>Intercom <a href="https://www.intercom.com/helpdesk/knowledge-hub" target="_blank" class="source-tag" title="Intercom [10]">[10]</a></span>
+        <span>Zendesk <a href="https://support.zendesk.com/hc/en-us/articles/9521463831578-Connecting-external-content-sources-to-an-AI-agent-to-power-AI-generated-answers" target="_blank" class="source-tag" title="Zendesk [11]">[11]</a></span>
+        <span>Decagon <a href="https://decagon.ai/product/integrations" target="_blank" class="source-tag" title="Decagon [12]">[12]</a></span>
+        <span>Sierra <a href="https://sierra.ai/uk/blog/agent-data-platform" target="_blank" class="source-tag" title="Sierra [13]">[13]</a></span>
+        <span>Talkdesk</span>
+        <span>HubSpot</span>
+      </div>
+      <p class="channel-need">
+        客服、销售和员工助手对搜索准确性极度敏感；回答必须查准政策、历史工单、帮助中心、产品文档、CRM 记录和内部知识。
+      </p>
+      <div class="channel-evidence">
+        <span>Intercom: Knowledge Hub for AI, agents, self-serve support <a href="https://www.intercom.com/helpdesk/knowledge-hub" target="_blank" class="source-tag" title="Intercom [10]">[10]</a></span>
+        <span>Zendesk: external content sources + Federated Search API <a href="https://support.zendesk.com/hc/en-us/articles/9521463831578-Connecting-external-content-sources-to-an-AI-agent-to-power-AI-generated-answers" target="_blank" class="source-tag" title="Zendesk [11]">[11]</a></span>
+        <span>Decagon / Sierra: knowledge sync + agent data platform <a href="https://decagon.ai/product/integrations" target="_blank" class="source-tag" title="Decagon [12]">[12]</a><a href="https://sierra.ai/uk/blog/agent-data-platform" target="_blank" class="source-tag" title="Sierra [13]">[13]</a></span>
+      </div>
+      <div class="channel-bottom">
+        <p><b>解决</b>增强它们现有 AI Agent 的知识检索能力，让客服、销售能查准知识库、历史工单和内部文档</p>
+        <p><b>收入</b>Embedded API，按租户 / 工作区 / 查询量收费，高级模块分成</p>
+      </div>
+      <em>客服和销售 Agent 要稳定回答，背后需要可信搜索层。</em>
+    </article>
+
+    <article class="ecosystem-channel channel-integrator">
+      <div class="channel-head">
+        <span class="channel-index mono">03</span>
+        <h3>AI 集成商 / 咨询公司</h3>
+      </div>
+      <div class="channel-companies" aria-label="代表公司">
+        <span>PwC</span><span>Accenture</span><span>Deloitte</span><span>EY</span><span>KPMG</span><span>DXC</span><span>Slalom</span><span>EPAM</span>
+      </div>
+      <p class="channel-need">
+        企业 Agent 项目反复卡在数据接入、字段映射、权限、同步、检索评估、引用、审计和运维；每个项目从零搭 RAG 会拖慢交付。
+      </p>
+      <div class="channel-evidence">
+        <span>CLI staged workflow: source / selection / routing / preview / sync / endpoint</span>
+        <span>preview before sync + structured JSON，适合标准交付流程</span>
+      </div>
+      <div class="channel-bottom">
+        <p><b>解决</b>成为企业 Agent 项目的标准检索底座，减少从零搭 RAG、数据接入和权限同步的交付成本</p>
+        <p><b>收入</b>实施费 / 企业年合同 / 集成商批量采购 / 行业模板包</p>
+      </div>
+      <em>集成商交付行业 Agent，Ultrafilter 缩短检索工程周期。</em>
+    </article>
+
+    <article class="ecosystem-channel channel-data">
+      <div class="channel-head">
+        <span class="channel-index mono">04</span>
+        <h3>数据平台 / ETL / RAG 基础设施</h3>
+      </div>
+      <div class="channel-companies" aria-label="代表公司">
+        <span>Unstructured <a href="https://unstructured.io/blog/enterprise-rag-why-connectors-matter-in-production-systems" target="_blank" class="source-tag" title="Unstructured [16]">[16]</a></span>
+        <span>Databricks <a href="https://docs.databricks.com/aws/en/generative-ai/agent-framework/unstructured-retrieval-tools" target="_blank" class="source-tag" title="Databricks [15]">[15]</a></span>
+        <span>Snowflake <a href="https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-search/cortex-search-overview" target="_blank" class="source-tag" title="Snowflake [14]">[14]</a></span>
+        <span>Fivetran</span><span>Airbyte</span><span>Pinecone</span>
+      </div>
+      <p class="channel-need">
+        这些公司拥有数据管道、存储、解析、治理或向量基础设施，但未必替每个 AI 应用提供完整 enterprise context API。
+      </p>
+      <div class="channel-evidence">
+        <span>Unstructured: enterprise RAG connectors for production systems <a href="https://unstructured.io/blog/enterprise-rag-why-connectors-matter-in-production-systems" target="_blank" class="source-tag" title="Unstructured [16]">[16]</a></span>
+        <span>Databricks: Vector Search / MCP servers / retriever tools <a href="https://docs.databricks.com/aws/en/generative-ai/agent-framework/unstructured-retrieval-tools" target="_blank" class="source-tag" title="Databricks [15]">[15]</a></span>
+        <span>Snowflake: Cortex Search for RAG applications <a href="https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-search/cortex-search-overview" target="_blank" class="source-tag" title="Snowflake [14]">[14]</a></span>
+      </div>
+      <div class="channel-bottom">
+        <p><b>解决</b>数据平台负责同步、治理和存储；Ultrafilter 负责补齐数据平台到 AI Agent 之间的检索和记忆层</p>
+        <p><b>收入</b>Marketplace / 联合方案 / API 批量调用 / 收入分成</p>
+      </div>
+      <em>数据平台负责数据流动，Ultrafilter 负责 Agent 调用哪一段。</em>
+    </article>
+  </main>
+
+  <footer class="ecosystem-footer">
+    <div class="ecosystem-quote">
+      <svg viewBox="0 0 64 38" aria-hidden="true">
+        <path d="M19 3 C7 14, 14 28, 34 28" />
+        <path d="M28 21 L36 28 L26 32" />
+      </svg>
+      <p>合作伙伴负责分发场景，Ultrafilter 负责沉淀搜索用量</p>
+    </div>
+  </footer>
+</div>

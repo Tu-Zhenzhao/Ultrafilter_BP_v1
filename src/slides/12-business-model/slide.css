@@ -565,21 +565,14 @@
 .flywheel-track {
   align-items: stretch;
   display: grid;
-  gap: 10px;
+  gap: 5px;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   padding-top: 6px;
   position: relative;
 }
 
 .flywheel-track::before {
-  animation: flywheel-track-draw 0.78s cubic-bezier(0.16, 1, 0.3, 1) 3.42s both;
-  background: linear-gradient(90deg, rgba(36, 79, 134, 0.08), rgba(36, 79, 134, 0.32), rgba(36, 79, 134, 0.08));
-  content: "";
-  height: 1px;
-  left: 22px;
-  position: absolute;
-  right: 22px;
-  top: 24px;
+  display: none;
 }
 
 .flywheel-node {
@@ -597,17 +590,6 @@
 .flywheel-node:nth-child(5) { animation-delay: 4.12s; }
 
 .flywheel-node::after {
-  background: var(--node-color);
-  clip-path: polygon(0 0, 100% 50%, 0 100%);
-  content: "";
-  height: 8px;
-  position: absolute;
-  right: -11px;
-  top: 14px;
-  width: 8px;
-}
-
-.flywheel-node:last-child::after {
   display: none;
 }
 
@@ -619,25 +601,61 @@
 
 .node-head {
   align-items: center;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--node-color) 20%, white) 0%, rgba(255, 255, 255, 0.76) 52%, color-mix(in srgb, var(--node-color) 14%, white) 100%);
+  border: 0;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    inset 0 0 0 1px color-mix(in srgb, var(--node-color) 30%, transparent),
+    0 6px 12px rgba(0, 0, 0, 0.035);
   display: flex;
   gap: 6px;
+  height: 24px;
   margin-bottom: 4px;
   min-width: 0;
+  padding: 2px 13px 2px 4px;
+  position: relative;
+  z-index: 1;
+}
+
+.flywheel-node:first-child .node-head {
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 50%, calc(100% - 10px) 100%, 0 100%);
+}
+
+.flywheel-node:not(:first-child):not(:last-child) .node-head {
+  clip-path: polygon(9px 0, calc(100% - 10px) 0, 100% 50%, calc(100% - 10px) 100%, 9px 100%, 0 50%);
+  padding-left: 10px;
+}
+
+.flywheel-node:last-child .node-head {
+  clip-path: polygon(9px 0, 100% 0, 100% 100%, 9px 100%, 0 50%);
+  padding-left: 10px;
+}
+
+.flywheel-node:not(:last-child) .node-head::after {
+  display: none;
 }
 
 .node-head span {
   align-items: center;
-  background: rgba(255, 255, 255, 0.62);
-  border: 1px solid color-mix(in srgb, var(--node-color) 42%, transparent);
+  background: var(--node-color);
+  border: 0;
   color: var(--node-color);
+  color: white;
   display: inline-flex;
-  flex: 0 0 24px;
+  flex: 0 0 25px;
   font-family: "JetBrains Mono", monospace;
   font-size: 0.58rem;
   font-weight: 900;
-  height: 19px;
+  height: 18px;
   justify-content: center;
   line-height: 1;
+  position: relative;
+}
+
+.flywheel-node:not(:first-child) .node-head span::before,
+.flywheel-node:not(:last-child) .node-head span::after {
+  display: none;
 }
 
 .node-head strong {

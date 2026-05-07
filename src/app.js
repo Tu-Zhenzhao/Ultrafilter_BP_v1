@@ -1,9 +1,9 @@
-import { slides } from "./deck/manifest.js?v=20260506-business12v2";
-import { DeckController } from "./deck/deck-controller.js?v=20260506-business12v2";
-import { bindExportPdf } from "./deck/export-pdf.js?v=20260506-business12v2";
-import { LanguageController } from "./deck/language.js?v=20260506-business12v2";
-import { ProgressController } from "./deck/progress.js?v=20260506-business12v2";
-import { bindResponsiveDeck } from "./deck/responsive-deck.js?v=20260506-business12v2";
+import { slides } from "./deck/manifest.js?v=20260507-ecosystem13";
+import { DeckController } from "./deck/deck-controller.js?v=20260507-ecosystem13";
+import { bindExportPdf } from "./deck/export-pdf.js?v=20260507-ecosystem13";
+import { LanguageController } from "./deck/language.js?v=20260507-ecosystem13";
+import { ProgressController } from "./deck/progress.js?v=20260507-ecosystem13";
+import { bindResponsiveDeck } from "./deck/responsive-deck.js?v=20260507-ecosystem13";
 
 const deck = new DeckController({
   deckElement: document.getElementById("deck"),
