@@ -1,5 +1,5 @@
-import { slides } from "./deck/manifest.js?v=20260507-visible-slides";
-import { DeckController } from "./deck/deck-controller.js?v=20260507-visible-slides";
+import { slides } from "./deck/manifest.js?v=20260508-competition14field3";
+import { DeckController } from "./deck/deck-controller.js?v=20260508-competition14field3";
 import { bindExportPdf } from "./deck/export-pdf.js?v=20260507-ecosystem13";
 import { LanguageController } from "./deck/language.js?v=20260507-ecosystem13";
 import { ProgressController } from "./deck/progress.js?v=20260507-ecosystem13";
