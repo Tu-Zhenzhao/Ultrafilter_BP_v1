@@ -294,7 +294,7 @@
 
 /* 3. Big Tech */
 .cluster-monolith {
-  left: calc(var(--comp-axis-x) + 60px); bottom: 10px;
+  left: calc(var(--comp-axis-x) + 60px); bottom: 18px;
 }
 .cluster-monolith .mono-meta .mono { color: var(--comp-grey); }
 .cluster-monolith .reps { color: var(--comp-grey); }
