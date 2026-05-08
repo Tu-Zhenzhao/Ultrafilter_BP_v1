@@ -11,6 +11,9 @@
   --comp-ink: #1a1a1a;
   --comp-muted: rgba(85, 85, 85, 0.7);
   --comp-line: rgba(0, 0, 0, 0.08);
+  --diag-warm-bg: rgba(217, 162, 27, 0.11);
+  --diag-warm-border: rgba(183, 132, 45, 0.32);
+  --diag-warm-label: rgba(117, 80, 14, 0.72);
   --comp-axis-x: 50%;
   --comp-axis-y: 50%;
   padding: 38px 48px 34px;
@@ -36,6 +39,11 @@
   color: var(--comp-muted);
   font-size: 1rem;
   margin-top: 8px;
+}
+
+.competition-page-marker {
+  text-align: right;
+  width: 100%;
 }
 
 /* --- Coordinate System (Kept as requested) --- */
@@ -86,105 +94,303 @@
 
 .cluster { position: absolute; }
 
-/* 1. RAG Frameworks (Blueprint Style) - Emerald Theme */
-.cluster-blueprint {
-  left: 0; top: 10px;
-  width: 440px;
+/* Shared diagnostic blocks: quiet facts, clear gap, blue answer */
+.cluster-blueprint,
+.cluster-strata,
+.cluster-monolith {
+  width: 430px;
   text-align: left;
 }
+
+.cluster-blueprint .bp-tag,
+.cluster-strata .strata-label,
+.cluster-monolith .mono-meta .mono {
+  display: block;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  opacity: 0.62;
+}
+
+.cluster-blueprint h3,
+.cluster-strata h3,
+.cluster-monolith h3 {
+  color: rgba(26, 26, 26, 0.68);
+  font-size: 1.26rem;
+  line-height: 1.08;
+  margin: 5px 0 0;
+}
+
+.cluster-blueprint .reps,
+.cluster-strata .reps,
+.cluster-monolith .reps {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  line-height: 1.35;
+  margin: 5px 0 13px;
+  opacity: 0.58;
+}
+
+.bp-content,
+.strata-details,
+.mono-grid {
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  display: grid;
+  gap: 9px;
+  padding-top: 9px;
+}
+
+.bp-item,
+.strata-row,
+.mono-cell {
+  background: transparent;
+  padding: 0;
+}
+
+.bp-item label,
+.strata-row b,
+.mono-cell b {
+  color: rgba(26, 26, 26, 0.38);
+  display: block;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  font-weight: 800;
+  margin-bottom: 3px;
+}
+
+.bp-item span,
+.strata-row span,
+.mono-cell p {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.34;
+  margin: 0;
+}
+
+.bp-item span b {
+  color: rgba(26, 26, 26, 0.56);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  margin-right: 4px;
+}
+
+.diag-why span,
+.mono-cell.diag-why p,
+.strata-row.diag-why span {
+  color: rgba(26, 26, 26, 0.42);
+  font-weight: 500;
+}
+
+.diag-gap {
+  background: var(--diag-warm-bg);
+  border-left: 3px solid var(--diag-warm-border);
+  padding: 8px 10px;
+}
+
+.diag-gap label,
+.diag-gap > b,
+.mono-cell.diag-gap b {
+  color: var(--diag-warm-label);
+  font-weight: 900;
+}
+
+.diag-gap span,
+.mono-cell.diag-gap p {
+  color: rgba(0, 0, 0, 0.9);
+  font-weight: 840;
+}
+
+.gap-primary {
+  display: block;
+  font-size: 15px !important;
+  line-height: 1.22 !important;
+  margin-bottom: 5px;
+}
+
+.gap-secondary {
+  color: rgba(0, 0, 0, 0.68) !important;
+  display: block;
+  font-size: 12.5px !important;
+  font-weight: 700 !important;
+  line-height: 1.32 !important;
+}
+
+.diag-answer {
+  border-left: 2px solid rgba(31, 63, 114, 0.24);
+  color: var(--comp-blue);
+  padding-left: 10px;
+}
+
+.diag-answer label,
+.diag-answer > b,
+.mono-cell.diag-answer b {
+  color: rgba(31, 63, 114, 0.58);
+}
+
+.diag-answer span,
+.mono-cell.diag-answer p {
+  color: rgba(31, 63, 114, 0.82);
+  font-weight: 740;
+}
+
+/* 1. RAG / Knowledge Layer */
+.cluster-blueprint {
+  left: 34px; top: 14px;
+  width: 490px;
+}
 .cluster-blueprint .bp-tag {
-  font-size: 8px; color: var(--comp-green); border-left: 2px solid var(--comp-green); padding-left: 6px;
+  color: var(--comp-green);
 }
-.cluster-blueprint h3 { margin-top: 8px; font-size: 1.5rem; color: #222; }
-.cluster-blueprint .reps { font-size: 9px; margin: 4px 0 16px; color: var(--comp-green); opacity: 0.6; }
-
-.bp-content {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
-  border-top: 1px solid rgba(45, 106, 79, 0.2); padding-top: 12px;
+.cluster-blueprint h3 {
+  font-size: 1.18rem;
 }
-.bp-item label { display: block; font-size: 7px; color: var(--comp-green); margin-bottom: 4px; opacity: 0.7; }
-.bp-item span { font-size: 10px; line-height: 1.4; font-weight: 500; display: block; }
+.cluster-blueprint .reps {
+  font-size: 10.5px;
+  margin-bottom: 10px;
+}
+.cluster-blueprint .bp-content {
+  gap: 6px;
+  padding-top: 7px;
+}
+.cluster-blueprint .bp-item span {
+  font-size: 12px;
+  line-height: 1.28;
+}
+.cluster-blueprint .diag-gap {
+  padding: 7px 9px;
+}
+.cluster-blueprint .gap-primary {
+  font-size: 13.7px !important;
+  line-height: 1.16 !important;
+  margin-bottom: 3px;
+}
+.cluster-blueprint .gap-secondary {
+  font-size: 11.7px !important;
+  line-height: 1.2 !important;
+}
+.cluster-blueprint .diag-answer span {
+  font-size: 11.3px;
+  line-height: 1.2;
+}
 
-/* 2. Vector DBs (Strata Style) - Terracotta Theme */
+/* 2. Vector DBs */
 .cluster-strata {
-  left: 0; bottom: 10px;
-  width: 420px;
-  text-align: right;
+  left: 48px; bottom: 18px;
 }
-.cluster-strata .strata-label { font-size: 8px; color: var(--comp-orange); display: block; }
-.cluster-strata h3 { font-size: 1.5rem; margin: 4px 0; color: #222; }
-.cluster-strata .reps { font-size: 9px; color: var(--comp-orange); opacity: 0.6; margin-bottom: 20px; }
+.cluster-strata .strata-label { color: var(--comp-orange); }
+.cluster-strata .reps { color: var(--comp-orange); }
+.strata-row.diag-gap {
+  max-width: 100%;
+}
+.strata-row.diag-gap span,
+.mono-cell.diag-gap p {
+  font-size: 15px;
+  line-height: 1.24;
+}
+.strata-row.diag-gap strong {
+  font-weight: 950;
+}
 
-.strata-details { border-right: 1px solid rgba(188, 108, 37, 0.2); padding-right: 15px; }
-.strata-row { margin-bottom: 12px; }
-.strata-row b { font-size: 7px; color: var(--comp-orange); display: block; margin-bottom: 2px; opacity: 0.7; }
-.strata-row span { font-size: 10.5px; line-height: 1.3; font-weight: 500; display: block; }
-.uf-row { background: rgba(188, 108, 37, 0.05); padding: 8px; margin-right: -8px; border-radius: 2px; }
-.uf-row span { color: var(--comp-orange); font-weight: 800; }
-
-/* 3. Big Tech (Monolith Style) - Steel Theme */
+/* 3. Big Tech */
 .cluster-monolith {
   left: calc(var(--comp-axis-x) + 60px); bottom: 10px;
-  width: 440px;
 }
-.cluster-monolith .mono-meta .mono { font-size: 8px; color: var(--comp-grey); }
-.mono-symbol { width: 8px; height: 8px; background: var(--comp-grey); }
-.cluster-monolith h3 { font-size: 1.5rem; color: var(--comp-grey); }
-.cluster-monolith .reps { font-size: 9px; color: var(--comp-grey); opacity: 0.6; margin: 4px 0 16px; }
-
-.mono-grid { display: grid; gap: 1px; background: rgba(74, 78, 105, 0.2); }
-.mono-cell { background: var(--comp-paper); padding: 8px 0; }
-.mono-cell p { margin: 0; font-size: 10.5px; line-height: 1.35; }
-.mono-cell b { font-family: "JetBrains Mono", monospace; font-size: 7px; color: var(--comp-grey); opacity: 0.6; margin-right: 8px; }
-.uf-cell { border-left: 2px solid var(--comp-grey); padding-left: 8px !important; }
-.uf-cell p { color: var(--comp-grey); font-weight: 700; }
-
-/* 4. Managed RAG (Capsule Style) - Amethyst Theme */
-.cluster-capsule {
-  left: 150px;
-  position: absolute;
-  top: calc(var(--comp-axis-y) - 92px);
-  z-index: 10;
+.cluster-monolith .mono-meta .mono { color: var(--comp-grey); }
+.cluster-monolith .reps { color: var(--comp-grey); }
+.mono-symbol { display: none; }
+.mono-cell p span { display: block; }
+.mono-cell.diag-gap { padding: 9px 11px 9px; }
+.mono-cell.diag-gap strong {
+  font-weight: 950;
 }
-.capsule-inner {
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(236, 240, 236, 0.74)),
-    rgba(255,255,255,0.88);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(63, 100, 112, 0.22);
-  border-radius: 6px;
-  padding: 12px 14px;
-  width: 360px;
-  box-shadow: 0 12px 30px rgba(63, 100, 112, 0.09);
-}
-.capsule-inner header .mono { font-size: 7px; color: var(--comp-managed); font-weight: 900; }
-.capsule-inner h3 { font-size: 1rem; margin: 4px 0; color: #333; }
-.capsule-inner .managed-reps { font-size: 7px; color: var(--comp-managed); opacity: 0.62; margin-bottom: 9px; }
 
-.capsule-content { display: flex; flex-direction: column; gap: 6px; }
-.c-box { font-size: 8.8px; line-height: 1.28; }
-.c-box b { font-size: 6px; color: var(--comp-managed); opacity: 0.84; margin-right: 6px; }
-.uf-box { color: var(--comp-managed); font-weight: 700; border-top: 1px dashed rgba(63, 100, 112, 0.24); padding-top: 8px; margin-top: 2px; }
-
-/* 5. Ultrafilter AI (Nexus Style) - THE Deep Blue Theme */
+/* 4. Ultrafilter AI (Hero Capsule Style) - THE Deep Blue Theme */
 .cluster-nexus {
-  left: calc(var(--comp-axis-x) + 60px); top: 0;
-  width: 460px;
+  left: calc(var(--comp-axis-x) + 66px); top: -28px;
+  transform-origin: 394px 24px;
+  width: 456px;
 }
-.nexus-wrap { position: relative; }
-.nexus-pointer { position: absolute; left: -20px; top: 10px; width: 4px; height: 45px; background: var(--comp-blue); box-shadow: 0 0 15px rgba(31, 63, 114, 0.2); }
-.nexus-label { font-size: 9px; font-weight: 900; color: var(--comp-blue); letter-spacing: 0.25em; }
-.text-uf { font-size: 3.2rem; line-height: 0.85; margin: 10px 0; color: var(--comp-blue); filter: drop-shadow(0 2px 4px rgba(31, 63, 114, 0.1)); }
-.cluster-nexus .tagline { font-size: 1.25rem; font-weight: 900; color: #222; margin-bottom: 24px; }
+.nexus-wrap {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(235, 240, 247, 0.82) 62%, rgba(223, 232, 242, 0.68)),
+    linear-gradient(90deg, rgba(31, 63, 114, 0.035) 1px, transparent 1px) 0 0 / 38px 100%,
+    rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(31, 63, 114, 0.28);
+  border-radius: 5px;
+  box-shadow:
+    0 18px 30px rgba(31, 63, 114, 0.14),
+    0 2px 0 rgba(31, 63, 114, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.72);
+  padding: 12px 15px 12px;
+  position: relative;
+}
+.nexus-wrap::before {
+  background: var(--comp-blue);
+  border-radius: 50%;
+  box-shadow: 0 0 12px rgba(31, 63, 114, 0.2);
+  content: "";
+  height: 7px;
+  left: 12px;
+  position: absolute;
+  top: 12px;
+  width: 7px;
+}
+.nexus-wrap::after {
+  color: rgba(31, 63, 114, 0.055);
+  content: "API";
+  font-family: "Inter", sans-serif;
+  font-size: 74px;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  position: absolute;
+  right: 13px;
+  top: 8px;
+  z-index: 0;
+}
+.nexus-pin {
+  background:
+    radial-gradient(circle at 34% 30%, rgba(255, 255, 255, 0.78), transparent 34%),
+    var(--comp-blue);
+  border: 1px solid rgba(20, 45, 88, 0.2);
+  border-radius: 50%;
+  box-shadow:
+    0 2px 4px rgba(31, 63, 114, 0.22),
+    0 0 0 5px rgba(31, 63, 114, 0.055);
+  height: 12px;
+  position: absolute;
+  right: 28px;
+  top: 18px;
+  width: 12px;
+  z-index: 3;
+}
+.nexus-pin::after {
+  background: rgba(31, 63, 114, 0.2);
+  border-radius: 50%;
+  content: "";
+  height: 4px;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 4px;
+}
+.nexus-label { display: inline-block; font-size: 11px; font-weight: 900; color: var(--comp-blue); letter-spacing: 0.28em; margin-left: 16px; position: relative; z-index: 1; }
+.text-uf { font-size: 2.24rem; line-height: 0.96; margin: 5px 0 4px; color: var(--comp-blue); filter: drop-shadow(0 2px 4px rgba(31, 63, 114, 0.1)); position: relative; z-index: 1; }
+.cluster-nexus .tagline { font-size: 1.12rem; font-weight: 900; color: #222; margin-bottom: 10px; position: relative; z-index: 1; }
 
-.nexus-manifesto { display: flex; flex-direction: column; gap: 16px; margin-bottom: 20px; }
-.manifesto-block h4 { font-size: 7px; color: var(--comp-blue); margin-bottom: 5px; font-weight: 900; }
-.manifesto-block p { font-size: 11px; font-weight: 600; line-height: 1.4; color: var(--comp-ink); }
+.nexus-manifesto { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 10px; position: relative; z-index: 1; }
+.manifesto-block { border-left: 2px solid rgba(31, 63, 114, 0.18); padding-left: 9px; }
+.manifesto-block h4 { font-size: 10px; color: var(--comp-blue); margin-bottom: 3px; font-weight: 900; }
+.manifesto-block p { font-size: 13px; font-weight: 650; line-height: 1.2; color: var(--comp-ink); }
 
 .nexus-footer {
-  display: flex; gap: 20px; padding-top: 15px; border-top: 1px solid rgba(31, 63, 114, 0.15);
-  font-size: 8px; font-weight: 900; color: var(--comp-blue); opacity: 0.8;
+  display: flex; gap: 9px; padding-top: 8px; border-top: 1px solid rgba(31, 63, 114, 0.15);
+  font-size: 11px; font-weight: 900; color: var(--comp-blue); opacity: 0.8;
+  position: relative; z-index: 1;
 }
+.nexus-footer span { border: 1px solid rgba(31, 63, 114, 0.18); border-radius: 2px; padding: 3px 7px; }
 
 /* Animations */
 .anim-fade-up { animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) both; }
@@ -193,8 +399,15 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-.anim-float { animation: float 6s ease-in-out infinite; }
+.anim-float { animation: card-tap 6.8s ease-in-out infinite; }
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(10px); }
+}
+
+@keyframes card-tap {
+  0%, 66%, 100% { transform: rotate(-4deg) translate3d(0, 0, 0); }
+  74% { transform: rotate(-9.5deg) translate3d(-3px, 1px, 0); }
+  83% { transform: rotate(-1.8deg) translate3d(1px, -1px, 0); }
+  92% { transform: rotate(-4deg) translate3d(0, 0, 0); }
 }

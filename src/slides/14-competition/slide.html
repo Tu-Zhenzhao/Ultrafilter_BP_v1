@@ -4,7 +4,7 @@
         <div class="page-marker competition-page-marker">竞争格局 // COMPETITION</div>
         <h2 class="title font-bold tracking-tighter">竞争定位：开箱即用的场景化私有搜索</h2>
         <p class="desc serif italic mt-2 opacity-60">
-            客户不必在“大厂通用搜索”和“自建 RAG”之间二选一。Ultrafilter 提供第三条路。
+            客户不必在“大厂通用搜索”和“自建 RAG”之间二选一 Ultrafilter 提供第三条路
         </p>
     </header>
 
@@ -26,23 +26,27 @@
 
         <!-- 象限集群 -->
         <div class="spatial-quadrants">
-            <!-- 左上：RAG 框架 (工程解构风格) -->
+            <!-- 左上：RAG / 知识层 (工程解构风格) -->
             <div class="cluster cluster-blueprint">
                 <div class="bp-header">
-                    <span class="bp-tag mono">ENGINEERING SCAFFOLD</span>
-                    <h3 class="text-3xl font-bold">RAG 框架 / 自建 Pipeline</h3>
+                    <h3 class="text-3xl font-bold">RAG / 知识层：从自建到托管</h3>
                 </div>
-                <p class="reps mono">LangChain / LlamaIndex / Haystack / 自建 RAG</p>
+                <p class="reps mono">LangChain / LlamaIndex / Pinecone Assistant</p>
                 <div class="bp-content">
-                    <div class="bp-column">
-                        <div class="bp-item">
-                            <label class="mono">WHY CHOOSE</label>
-                            <span>最灵活，可以按业务场景深度定制。</span>
-                        </div>
-                        <div class="bp-item">
-                            <label class="mono">FRICTION</label>
-                            <span>从 demo 到生产很重，长期稳定运行需要完整工程团队。</span>
-                        </div>
+                    <div class="bp-item diag-why">
+                        <label class="mono">客户为什么选</label>
+                        <span><b>自建</b> 最灵活，可以按业务场景深度定制 <b>托管</b> 比自建更省事，能更快把知识库变成 AI 可用能力</span>
+                    </div>
+                    <div class="bp-item diag-gap">
+                        <label class="mono">FRICTION / 真正卡点</label>
+                        <span>
+                            <span class="gap-primary"><b>自建</b> 从 demo 到生产很重，长期稳定运行需要完整工程团队</span>
+                            <span class="gap-secondary"><b>托管</b> 多数仍偏通用知识层，对时间线索、行为记忆覆盖不完整</span>
+                        </span>
+                    </div>
+                    <div class="bp-item diag-answer bp-uf">
+                        <label class="mono">ULTRAFILTER 补上</label>
+                        <span>保留场景定制能力，把重复工程产品化；在托管基础上加入场景化搜索、时间锥和记忆轨迹</span>
                     </div>
                 </div>
             </div>
@@ -50,21 +54,20 @@
             <!-- 左下：向量数据库 (层级堆叠风格) -->
             <div class="cluster cluster-strata">
                 <div class="strata-body">
-                    <span class="strata-label mono">SEARCH COMPONENTS</span>
                     <h3 class="text-3xl font-bold">向量数据库 / 搜索数据库</h3>
                     <p class="reps mono">Pinecone / Qdrant / LanceDB / Elastic</p>
                     <div class="strata-details">
-                        <div class="strata-row">
-                            <b class="mono">WHY</b>
-                            <span>底层检索能力强，适合存向量、做相似搜索和混合检索。</span>
+                        <div class="strata-row diag-why">
+                            <b class="mono">客户为什么选</b>
+                            <span>底层检索能力强，适合存向量、做相似搜索和混合检索</span>
                         </div>
-                        <div class="strata-row">
-                            <b class="mono">GAP</b>
-                            <span>客户还要自己拼接入、mapping、sync、权限、多模态、评估和记忆层。</span>
+                        <div class="strata-row diag-gap">
+                            <b class="mono">GAP / 真正卡点</b>
+                            <span>客户还要自己拼<strong>接入</strong>、<strong>mapping</strong>、<strong>sync</strong>、<strong>权限</strong>、<strong>多模态</strong>、<strong>评估</strong>和<strong>记忆层</strong></span>
                         </div>
-                        <div class="strata-row uf-row">
-                            <b class="mono">VALUE</b>
-                            <span>把底层检索包装成可直接使用的私有搜索系统。</span>
+                        <div class="strata-row diag-answer uf-row">
+                            <b class="mono">ULTRAFILTER 补上</b>
+                            <span>把底层检索包装成可直接使用的私有搜索系统</span>
                         </div>
                     </div>
                 </div>
@@ -72,76 +75,48 @@
 
             <!-- 右下：大厂入口 (工业单体风格) -->
             <div class="cluster cluster-monolith">
-                <div class="mono-meta">
-                    <span class="mono">ENTERPRISE PLATFORMS</span>
-                    <div class="mono-symbol"></div>
-                </div>
                 <h3 class="text-3xl font-bold">大厂企业知识入口 / Work AI</h3>
                 <p class="reps mono">OpenAI / Google / Microsoft / Glean / AWS</p>
                 <div class="mono-grid">
-                    <div class="mono-cell">
-                        <p><b>客户为什么选</b><span>接入方便，品牌可信，适合企业员工直接搜索公司知识。</span></p>
+                    <div class="mono-cell diag-why">
+                        <p><b>客户为什么选</b><span>接入方便，品牌可信，适合企业员工直接搜索公司知识</span></p>
                     </div>
-                    <div class="mono-cell">
-                        <p><b>卡在哪里</b><span>偏通用入口和自家生态，很难为每一种垂直搜索场景专门优化。</span></p>
+                    <div class="mono-cell diag-gap">
+                        <p><b>GAP / 真正卡点</b><span><strong>偏通用入口</strong>和<strong>自家生态</strong>，很难为每一种<strong>垂直搜索场景</strong>专门优化</span></p>
                     </div>
-                    <div class="mono-cell uf-cell">
-                        <p><b>Ultrafilter 补上</b><span>保留低门槛接入，同时服务更具体的场景，并可嵌入任何 AI 应用背后。</span></p>
+                    <div class="mono-cell diag-answer uf-cell">
+                        <p><b>Ultrafilter 补上</b><span>保留低门槛接入，同时服务更具体的场景，并可嵌入任何 AI 应用背后</span></p>
                     </div>
                 </div>
             </div>
 
             <!-- 右上：Ultrafilter (核心聚焦风格) -->
-            <div class="cluster cluster-nexus">
+            <div class="cluster cluster-nexus anim-float">
                 <div class="nexus-wrap">
-                    <div class="nexus-pointer"></div>
+                    <span class="nexus-pin" aria-hidden="true"></span>
                     <span class="nexus-label mono">THE THIRD WAY</span>
                     <h2 class="text-5xl font-bold text-uf">Ultrafilter AI</h2>
                     <p class="tagline text-2xl font-bold">开箱即用的场景化私有搜索层</p>
                     
                     <div class="nexus-manifesto">
                         <div class="manifesto-block">
-                            <h4 class="mono">SYNTHESIS</h4>
-                            <p>大厂的低门槛、自建的场景深度、向量库的底层能力、托管知识层的易用性。</p>
+                            <h4 class="mono">综合吸收</h4>
+                            <p>大厂的低门槛、自建的场景深度、向量库的底层能力、托管知识层的易用性</p>
                         </div>
                         <div class="manifesto-block">
-                            <h4 class="mono">VOID FILLED</h4>
-                            <p>不用重造 RAG，不被锁在通用入口里。交付可嵌入、可同步、可追踪、可按场景优化的私有搜索 API。</p>
+                            <h4 class="mono">补上的空缺</h4>
+                            <p>不用重造 RAG，不被锁在通用入口里 交付可嵌入、可同步、可追踪、可按场景优化的私有搜索 API</p>
                         </div>
                     </div>
                     
                     <div class="nexus-footer mono">
-                        <span>Time-Cone</span>
-                        <span>Memory Trace</span>
-                        <span>Multimodal</span>
+                        <span>时间锥</span>
+                        <span>记忆轨迹</span>
+                        <span>多模态</span>
                     </div>
                 </div>
             </div>
 
-            <!-- 漂浮层：Managed RAG (轻量胶囊风格) -->
-            <div class="drifting-label cluster-capsule anim-float">
-                <div class="capsule-inner">
-                    <header>
-                        <span class="mono">MANAGED RAG LAYER</span>
-                        <h3>Managed RAG / Knowledge Layer</h3>
-                    </header>
-                    <p class="managed-reps mono">Pinecone Assistant / Vectara / Ragie / LlamaCloud</p>
-                    <div class="capsule-content">
-                        <div class="c-box">
-                            <b class="mono">CLIENT</b>
-                            <span>比自建更省事，能更快把知识库变成 AI 可用能力。</span>
-                        </div>
-                        <div class="c-box">
-                            <b class="mono">LIMIT</b>
-                            <span>多数仍偏通用 knowledge layer，对时间线索、行为记忆覆盖不完整。</span>
-                        </div>
-                        <div class="c-box uf-box">
-                            <b class="mono">ULTRA</b>
-                            <span>在托管基础上加入场景化搜索、Time-Cone 和 Memory Trace。</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 </div>
