@@ -1,12 +1,16 @@
-/* Slide 14: Artistic Competition Matrix - Constellation Design */
+/* Slide 14: Precision Typography & Spatial Metaphor Design */
 
 [data-slug="14-competition"] {
-  --comp-blue: #1f3f72;
-  --comp-green: #2f4f4f;
+  --comp-blue: #1f3f72;      /* Ultrafilter - Nexus ONLY */
+  --comp-green: #2d6a4f;     /* RAG - Blueprint (Emerald) */
+  --comp-orange: #bc6c25;    /* VDB - Strata (Terracotta) */
+  --comp-grey: #4a4e69;      /* BigTech - Monolith (Steel) */
+  --comp-managed: #3f6470;   /* Managed - Capsule (Refined Teal Slate) */
+  
   --comp-paper: #f2f0e9;
   --comp-ink: #1a1a1a;
-  --comp-muted: rgba(85, 85, 85, 0.72);
-  --comp-line: rgba(0, 0, 0, 0.085);
+  --comp-muted: rgba(85, 85, 85, 0.7);
+  --comp-line: rgba(0, 0, 0, 0.08);
   --comp-axis-x: 50%;
   --comp-axis-y: 50%;
   padding: 38px 48px 34px;
@@ -20,521 +24,177 @@
   width: 100%;
 }
 
-.comp-header-minimal {
-  min-width: 0;
-  position: relative;
-  z-index: 10;
-}
-
-.competition-page-marker {
-  position: absolute;
-  right: 0;
-  top: 0;
-}
-
 .comp-header-minimal .title {
   color: var(--comp-ink);
-  font-size: 2.08rem;
+  font-size: 2.1rem;
   font-weight: 900;
-  letter-spacing: 0;
-  line-height: 1.04;
-  max-width: 920px;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
 }
 
 .comp-header-minimal .desc {
-  color: rgba(85, 85, 85, 0.66);
+  color: var(--comp-muted);
   font-size: 1rem;
-  line-height: 1.42;
-  margin-top: 7px;
-  max-width: 920px;
+  margin-top: 8px;
 }
 
-/* Spatial Matrix Canvas */
+/* --- Coordinate System (Kept as requested) --- */
 .spatial-matrix-canvas {
-  min-height: 0;
   position: relative;
   width: 100%;
+  height: 100%;
 }
 
-/* Precision Axes */
 .precision-axes {
-  inset: 0 18px 18px 18px;
+  inset: 0;
   pointer-events: none;
   position: absolute;
   z-index: 1;
 }
 
-.axis-cross {
-  position: absolute;
-}
-
+.axis-cross { position: absolute; }
 .x-axis-cross {
-  align-items: center;
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
-  left: 0;
-  right: 0;
-  top: var(--comp-axis-y);
+  display: flex; align-items: center;
+  left: 0; right: 0; top: var(--comp-axis-y);
   transform: translateY(-50%);
 }
-
 .y-axis-cross {
-  align-items: center;
-  bottom: 0;
-  display: grid;
-  grid-template-rows: auto minmax(0, 1fr) auto;
-  justify-items: center;
-  left: var(--comp-axis-x);
-  top: 0;
+  display: flex; flex-direction: column; align-items: center;
+  left: var(--comp-axis-x); top: 0; bottom: 0;
   transform: translateX(-50%);
-  width: 112px;
 }
-
-.axis-line-fine {
-  background: var(--comp-line);
-  position: relative;
-}
-
-.x-axis-cross .axis-line-fine {
-  height: 1px;
-  width: 100%;
-}
-
-.x-axis-cross .axis-line-fine::after {
-  background: repeating-linear-gradient(90deg, #000 0, #000 1px, transparent 1px, transparent 10px);
-  content: "";
-  height: 4px;
-  left: 0;
-  opacity: 0.15;
-  position: absolute;
-  top: -1.5px;
-  width: 100%;
-}
-
-.y-axis-cross .axis-line-fine {
-  height: 100%;
-  width: 1px;
-}
-
-.y-axis-cross .axis-line-fine::after {
-  background: repeating-linear-gradient(0deg, #000 0, #000 1px, transparent 1px, transparent 10px);
-  bottom: 0;
-  content: "";
-  height: 100%;
-  left: -1.5px;
-  opacity: 0.15;
-  position: absolute;
-  width: 4px;
-}
+.axis-line-fine { background: var(--comp-line); flex-grow: 1; }
+.x-axis-cross .axis-line-fine { height: 1px; }
+.y-axis-cross .axis-line-fine { width: 1px; }
 
 .axis-tag {
   background: var(--comp-paper);
-  color: rgba(0, 0, 0, 0.42);
-  display: inline-flex;
+  color: rgba(0,0,0,0.4);
   font-size: 10px;
   font-weight: 900;
-  letter-spacing: 0.08em;
-  line-height: 1;
-  padding: 5px 11px;
-  position: relative;
-  white-space: nowrap;
-  z-index: 2;
-}
-
-.axis-tag.left {
-  margin-right: 14px;
-}
-
-.axis-tag.right {
-  margin-left: 14px;
-}
-
-.axis-tag.top {
-  margin-bottom: 12px;
-}
-
-.axis-tag.bottom {
-  margin-top: 12px;
-}
-
-/* Quadrants Clusters */
-.spatial-quadrants {
-  height: 100%;
-  inset: 0 18px 18px 18px;
-  position: absolute;
-  z-index: 3;
-}
-
-.cluster {
-  display: flex;
-  flex-direction: column;
-  max-width: var(--cluster-width);
-  min-width: 0;
-  position: absolute;
-  width: var(--cluster-width);
-}
-
-.cluster h2,
-.cluster h3,
-.cluster p {
-  overflow-wrap: anywhere;
-}
-
-.cluster h3 {
-  color: var(--comp-ink);
-  font-size: 1.32rem;
-  font-weight: 900;
-  letter-spacing: 0;
-  line-height: 1.1;
-}
-
-.cluster .reps {
-  color: rgba(85, 85, 85, 0.72);
-  font-size: 0.52rem;
-  line-height: 1.45;
-  margin-top: 6px;
-}
-
-.cluster-label {
-  color: rgba(0, 0, 0, 0.22);
-  font-size: 7px;
-  font-weight: 900;
-  letter-spacing: 0.2em;
-  line-height: 1;
-  margin-bottom: 10px;
-}
-
-/* Cluster: RAG (Scaffold Style) */
-.cluster-rag {
-  --cluster-width: 392px;
-  align-items: flex-end;
-  left: 0;
-  text-align: right;
-  top: 14px;
-}
-
-.position-notes {
-  display: grid;
-  gap: 5px;
-  margin-top: 12px;
-  max-width: 100%;
-}
-
-.note-line {
-  color: rgba(26, 26, 26, 0.76);
-  display: grid;
-  gap: 5px;
-  line-height: 1.28;
-  margin: 0;
-  min-width: 0;
-  padding-top: 5px;
-  position: relative;
-}
-
-.note-line::before {
-  background: rgba(0, 0, 0, 0.12);
-  content: "";
-  height: 1px;
-  position: absolute;
-  top: 0;
-  width: 84px;
-}
-
-.note-line b {
-  color: rgba(0, 0, 0, 0.38);
-  font-family: "JetBrains Mono", monospace;
-  font-size: 7px;
-  font-weight: 900;
   letter-spacing: 0.1em;
-  line-height: 1;
+  padding: 4px 10px;
   text-transform: uppercase;
 }
 
-.note-line span {
-  font-size: 10.2px;
-  font-weight: 800;
-}
-
-.notes-right .note-line {
-  justify-items: end;
-  text-align: right;
-}
-
-.notes-right .note-line::before {
-  right: 0;
-}
-
-.notes-left .note-line {
-  justify-items: start;
-  text-align: left;
-}
-
-.notes-left .note-line::before {
-  left: 0;
-}
-
-.uf-fill {
-  color: rgba(31, 63, 114, 0.86);
-}
-
-.uf-fill::before {
-  background: rgba(31, 63, 114, 0.34);
-}
-
-.uf-fill b,
-.uf-fill span {
-  color: rgba(31, 63, 114, 0.86);
-}
-
-/* Cluster: VDB (Blueprint Style) */
-.cluster-vdb {
-  --cluster-width: 402px;
-  align-items: flex-end;
-  bottom: 12px;
-  left: 0;
-  text-align: right;
-}
-
-.blueprint-spine {
-  background: rgba(0, 0, 0, 0.06);
-  height: 170px;
-  position: absolute;
-  right: -15px;
-  top: 6px;
-  width: 1px;
-}
-
-.blueprint-details {
-  margin-top: 12px;
-}
-
-/* Cluster: BigTech (Monolith Style) */
-.cluster-bigtech {
-  --cluster-width: 426px;
-  bottom: 0;
-  left: calc(var(--comp-axis-x) + 70px);
-}
-
-.monolith-watermark {
-  bottom: -38px;
-  color: rgba(0, 0, 0, 0.022);
-  font-family: "Inter", sans-serif;
-  font-size: 174px;
-  font-weight: 900;
-  left: -26px;
-  line-height: 1;
-  pointer-events: none;
-  position: absolute;
-}
-
-.monolith-analysis {
-  margin-top: 12px;
-  max-width: 402px;
-}
-
-/* Cluster: Ultrafilter (Nexus Style) */
-.cluster-ultrafilter {
-  --cluster-width: 428px;
-  left: calc(var(--comp-axis-x) + 70px);
-  top: 10px;
-}
-
-.nexus-glow-rings {
-  left: 24px;
-  pointer-events: none;
-  position: absolute;
-  top: 50px;
-}
-
-.nexus-glow-rings .ring {
-  border: 1px solid rgba(31, 63, 114, 0.045);
-  border-radius: 50%;
-  left: 50%;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.nexus-glow-rings .ring:nth-child(1) {
-  height: 260px;
-  width: 260px;
-}
-
-.nexus-glow-rings .ring:nth-child(2) {
-  animation: nexus-pulse 6s ease-in-out infinite;
-  height: 380px;
-  width: 380px;
-}
-
-@keyframes nexus-pulse {
-  0%,
-  100% {
-    opacity: 0.3;
-    transform: translate(-50%, -50%) scale(1);
-  }
-
-  50% {
-    opacity: 0.6;
-    transform: translate(-50%, -50%) scale(1.08);
-  }
-}
-
-.nexus-content {
+/* --- Quadrants Base --- */
+.spatial-quadrants {
+  height: 100%;
   position: relative;
   z-index: 5;
 }
 
-.text-uf {
-  color: var(--comp-blue);
-  font-size: 2.34rem;
-  font-weight: 900;
-  letter-spacing: 0;
-  line-height: 0.98;
-}
+.cluster { position: absolute; }
 
-.nexus-content .tagline {
-  color: #555;
-  font-size: 1.04rem;
-  font-weight: 900;
-  line-height: 1.2;
-  margin-top: 6px;
+/* 1. RAG Frameworks (Blueprint Style) - Emerald Theme */
+.cluster-blueprint {
+  left: 0; top: 10px;
+  width: 440px;
+  text-align: left;
 }
-
-.uf-thesis {
-  display: grid;
-  gap: 8px;
-  margin: 15px 0 13px;
-  max-width: 408px;
+.cluster-blueprint .bp-tag {
+  font-size: 8px; color: var(--comp-green); border-left: 2px solid var(--comp-green); padding-left: 6px;
 }
+.cluster-blueprint h3 { margin-top: 8px; font-size: 1.5rem; color: #222; }
+.cluster-blueprint .reps { font-size: 9px; margin: 4px 0 16px; color: var(--comp-green); opacity: 0.6; }
 
-.uf-thesis p {
-  border-left: 3px solid rgba(31, 63, 114, 0.42);
-  margin: 0;
-  padding-left: 11px;
+.bp-content {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+  border-top: 1px solid rgba(45, 106, 79, 0.2); padding-top: 12px;
 }
+.bp-item label { display: block; font-size: 7px; color: var(--comp-green); margin-bottom: 4px; opacity: 0.7; }
+.bp-item span { font-size: 10px; line-height: 1.4; font-weight: 500; display: block; }
 
-.uf-thesis b {
-  color: rgba(31, 63, 114, 0.95);
-  display: block;
-  font-family: "JetBrains Mono", monospace;
-  font-size: 7px;
-  font-weight: 900;
-  letter-spacing: 0.1em;
-  line-height: 1;
-  margin-bottom: 5px;
-  text-transform: uppercase;
+/* 2. Vector DBs (Strata Style) - Terracotta Theme */
+.cluster-strata {
+  left: 0; bottom: 10px;
+  width: 420px;
+  text-align: right;
 }
+.cluster-strata .strata-label { font-size: 8px; color: var(--comp-orange); display: block; }
+.cluster-strata h3 { font-size: 1.5rem; margin: 4px 0; color: #222; }
+.cluster-strata .reps { font-size: 9px; color: var(--comp-orange); opacity: 0.6; margin-bottom: 20px; }
 
-.uf-thesis span {
-  color: rgba(26, 26, 26, 0.76);
-  display: block;
-  font-size: 10.6px;
-  font-weight: 800;
-  line-height: 1.34;
+.strata-details { border-right: 1px solid rgba(188, 108, 37, 0.2); padding-right: 15px; }
+.strata-row { margin-bottom: 12px; }
+.strata-row b { font-size: 7px; color: var(--comp-orange); display: block; margin-bottom: 2px; opacity: 0.7; }
+.strata-row span { font-size: 10.5px; line-height: 1.3; font-weight: 500; display: block; }
+.uf-row { background: rgba(188, 108, 37, 0.05); padding: 8px; margin-right: -8px; border-radius: 2px; }
+.uf-row span { color: var(--comp-orange); font-weight: 800; }
+
+/* 3. Big Tech (Monolith Style) - Steel Theme */
+.cluster-monolith {
+  left: calc(var(--comp-axis-x) + 60px); bottom: 10px;
+  width: 440px;
 }
+.cluster-monolith .mono-meta .mono { font-size: 8px; color: var(--comp-grey); }
+.mono-symbol { width: 8px; height: 8px; background: var(--comp-grey); }
+.cluster-monolith h3 { font-size: 1.5rem; color: var(--comp-grey); }
+.cluster-monolith .reps { font-size: 9px; color: var(--comp-grey); opacity: 0.6; margin: 4px 0 16px; }
 
-.tech-foot {
-  border-top: 1px solid rgba(31, 63, 114, 0.15);
-  color: rgba(31, 63, 114, 0.5);
-  font-size: 8px;
-  font-weight: 900;
-  letter-spacing: 0.1em;
-  line-height: 1;
-  padding-top: 13px;
-}
+.mono-grid { display: grid; gap: 1px; background: rgba(74, 78, 105, 0.2); }
+.mono-cell { background: var(--comp-paper); padding: 8px 0; }
+.mono-cell p { margin: 0; font-size: 10.5px; line-height: 1.35; }
+.mono-cell b { font-family: "JetBrains Mono", monospace; font-size: 7px; color: var(--comp-grey); opacity: 0.6; margin-right: 8px; }
+.uf-cell { border-left: 2px solid var(--comp-grey); padding-left: 8px !important; }
+.uf-cell p { color: var(--comp-grey); font-weight: 700; }
 
-/* Drifting Managed RAG */
-.drifting-label {
-  left: calc(var(--comp-axis-x) + 70px);
+/* 4. Managed RAG (Capsule Style) - Amethyst Theme */
+.cluster-capsule {
+  left: 150px;
   position: absolute;
-  top: calc(var(--comp-axis-y) - 58px);
+  top: calc(var(--comp-axis-y) - 92px);
   z-index: 10;
 }
-
-.drift-box {
+.capsule-inner {
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(242, 240, 233, 0.74)),
-    rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(31, 63, 114, 0.2);
-  box-shadow: 0 10px 22px rgba(31, 63, 114, 0.07);
-  max-width: 430px;
-  padding: 10px 15px 11px;
-  position: relative;
-  transform: rotate(-2deg);
-  width: 430px;
+    linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(236, 240, 236, 0.74)),
+    rgba(255,255,255,0.88);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(63, 100, 112, 0.22);
+  border-radius: 6px;
+  padding: 12px 14px;
+  width: 360px;
+  box-shadow: 0 12px 30px rgba(63, 100, 112, 0.09);
+}
+.capsule-inner header .mono { font-size: 7px; color: var(--comp-managed); font-weight: 900; }
+.capsule-inner h3 { font-size: 1rem; margin: 4px 0; color: #333; }
+.capsule-inner .managed-reps { font-size: 7px; color: var(--comp-managed); opacity: 0.62; margin-bottom: 9px; }
+
+.capsule-content { display: flex; flex-direction: column; gap: 6px; }
+.c-box { font-size: 8.8px; line-height: 1.28; }
+.c-box b { font-size: 6px; color: var(--comp-managed); opacity: 0.84; margin-right: 6px; }
+.uf-box { color: var(--comp-managed); font-weight: 700; border-top: 1px dashed rgba(63, 100, 112, 0.24); padding-top: 8px; margin-top: 2px; }
+
+/* 5. Ultrafilter AI (Nexus Style) - THE Deep Blue Theme */
+.cluster-nexus {
+  left: calc(var(--comp-axis-x) + 60px); top: 0;
+  width: 460px;
+}
+.nexus-wrap { position: relative; }
+.nexus-pointer { position: absolute; left: -20px; top: 10px; width: 4px; height: 45px; background: var(--comp-blue); box-shadow: 0 0 15px rgba(31, 63, 114, 0.2); }
+.nexus-label { font-size: 9px; font-weight: 900; color: var(--comp-blue); letter-spacing: 0.25em; }
+.text-uf { font-size: 3.2rem; line-height: 0.85; margin: 10px 0; color: var(--comp-blue); filter: drop-shadow(0 2px 4px rgba(31, 63, 114, 0.1)); }
+.cluster-nexus .tagline { font-size: 1.25rem; font-weight: 900; color: #222; margin-bottom: 24px; }
+
+.nexus-manifesto { display: flex; flex-direction: column; gap: 16px; margin-bottom: 20px; }
+.manifesto-block h4 { font-size: 7px; color: var(--comp-blue); margin-bottom: 5px; font-weight: 900; }
+.manifesto-block p { font-size: 11px; font-weight: 600; line-height: 1.4; color: var(--comp-ink); }
+
+.nexus-footer {
+  display: flex; gap: 20px; padding-top: 15px; border-top: 1px solid rgba(31, 63, 114, 0.15);
+  font-size: 8px; font-weight: 900; color: var(--comp-blue); opacity: 0.8;
 }
 
-.drift-box > span {
-  color: rgba(31, 63, 114, 0.5);
-  font-size: 7px;
-  font-weight: 900;
-  letter-spacing: 0.05em;
-  line-height: 1;
-}
-
-.drift-box h3 {
-  color: var(--comp-ink);
-  font-family: "Noto Serif SC", serif;
-  font-size: 14px;
-  font-weight: 900;
-  line-height: 1.16;
-  margin-top: 5px;
-}
-
-.drift-box .managed-reps {
-  color: rgba(31, 63, 114, 0.52);
-  font-size: 7px;
-  letter-spacing: 0.04em;
-  line-height: 1.3;
-  margin-top: 6px;
-}
-
-.managed-notes {
-  gap: 4px;
-  margin-top: 8px;
-}
-
-.managed-notes .note-line {
-  padding-top: 4px;
-}
-
-.managed-notes .note-line b {
-  font-size: 6.5px;
-}
-
-.managed-notes .note-line span {
-  font-size: 9.2px;
-  line-height: 1.28;
-}
-
-.anim-float {
-  animation: float 4s ease-in-out infinite;
-}
-
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0) rotate(-2deg);
-  }
-
-  50% {
-    transform: translateY(-8px) rotate(1deg);
-  }
-}
-
-/* Animation */
-.anim-fade-up {
-  animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
+/* Animations */
+.anim-fade-up { animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) both; }
 @keyframes fade-up {
-  from {
-    opacity: 0;
-    transform: translateY(18px);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.anim-float { animation: float 6s ease-in-out infinite; }
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(10px); }
 }
