@@ -1,4 +1,4 @@
-import { slides } from "./deck/manifest.js?v=20260508-competition14field3";
+import { slides } from "./deck/manifest.js?v=20260509-founding15";
 import { DeckController } from "./deck/deck-controller.js?v=20260508-competition14field3";
 import { bindExportPdf } from "./deck/export-pdf.js?v=20260507-ecosystem13";
 import { LanguageController } from "./deck/language.js?v=20260507-ecosystem13";

@@ -1,0 +1,554 @@
+/* Slide 15: Lighthouse customer funding plan */
+
+[data-slug="15-founding-plan"] {
+  --fp-blue: #1f3f72;
+  --fp-ink: #1a1a1a;
+  --fp-muted: rgba(85, 85, 85, 0.68);
+  --fp-line: rgba(0, 0, 0, 0.08);
+  --fp-soft-blue: rgba(31, 63, 114, 0.075);
+  --fp-warm: rgba(217, 162, 27, 0.12);
+  --fp-warm-line: rgba(183, 132, 45, 0.32);
+  padding: 28px 42px 24px;
+}
+
+.funding-plan-layout {
+  display: grid;
+  grid-template-rows: 84px minmax(0, 1fr) 46px;
+  height: 100%;
+  row-gap: 8px;
+}
+
+.funding-header {
+  align-items: start;
+  border-bottom: 1px solid var(--fp-line);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 28px;
+  padding-bottom: 4px;
+}
+
+.funding-page-marker {
+  margin-bottom: 5px;
+}
+
+.funding-title-block h2 {
+  color: rgba(26, 26, 26, 0.56);
+  font-size: 1rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.funding-title-block h1 {
+  color: var(--fp-ink);
+  font-size: 1.5rem;
+  font-weight: 950;
+  letter-spacing: -0.02em;
+  line-height: 1.04;
+  margin-top: 5px;
+}
+
+.lead {
+  color: var(--fp-blue);
+  font-size: 1rem;
+  font-weight: 900;
+  line-height: 1.28;
+  margin-top: 9px;
+}
+
+.sublead {
+  color: var(--fp-muted);
+  font-size: 10.4px;
+  font-weight: 600;
+  line-height: 1.16;
+  margin-top: 4px;
+  max-width: 740px;
+}
+
+.funding-amount-card {
+  background:
+    radial-gradient(circle at 14% 18%, rgba(217, 162, 27, 0.18), transparent 28%),
+    radial-gradient(circle at 82% 38%, rgba(31, 63, 114, 0.13), transparent 34%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(235, 240, 247, 0.86)),
+    var(--fp-soft-blue);
+  border: 1px solid rgba(31, 63, 114, 0.26);
+  box-shadow:
+    0 14px 28px rgba(31, 63, 114, 0.13),
+    0 0 0 1px rgba(217, 162, 27, 0.11),
+    inset 0 1px 0 rgba(255, 255, 255, 0.86);
+  isolation: isolate;
+  overflow: hidden;
+  padding: 8px 12px;
+  position: relative;
+  left: -58px;
+  top: -5px;
+}
+
+.funding-amount-card::before {
+  animation: funding-card-scan 1.45s cubic-bezier(0.16, 1, 0.3, 1) 0.36s both;
+  background: linear-gradient(
+    105deg,
+    transparent 0 38%,
+    rgba(255, 255, 255, 0.38) 45%,
+    rgba(255, 221, 129, 0.58) 50%,
+    rgba(255, 255, 255, 0.24) 55%,
+    transparent 62% 100%
+  );
+  content: "";
+  inset: -42% -52%;
+  pointer-events: none;
+  position: absolute;
+  transform: translateX(-68%);
+  z-index: -1;
+}
+
+.funding-amount-card::after {
+  background:
+    linear-gradient(90deg, rgba(217, 162, 27, 0.86), rgba(217, 162, 27, 0)) left top / 64px 2px no-repeat,
+    linear-gradient(180deg, rgba(217, 162, 27, 0.86), rgba(217, 162, 27, 0)) left top / 2px 36px no-repeat,
+    linear-gradient(270deg, rgba(31, 63, 114, 0.72), rgba(31, 63, 114, 0)) right bottom / 74px 2px no-repeat,
+    linear-gradient(0deg, rgba(31, 63, 114, 0.72), rgba(31, 63, 114, 0)) right bottom / 2px 34px no-repeat;
+  content: "";
+  inset: 0;
+  opacity: 0.9;
+  pointer-events: none;
+  position: absolute;
+  z-index: 2;
+}
+
+.funding-amount-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.funding-amount-card span {
+  color: rgba(31, 63, 114, 0.58);
+  display: block;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+}
+
+.funding-amount-card strong {
+  color: var(--fp-blue);
+  display: block;
+  font-size: 1.82rem;
+  font-weight: 950;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin: 5px 0 6px;
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.78),
+    0 0 18px rgba(217, 162, 27, 0.22);
+}
+
+.funding-amount-card p {
+  color: rgba(26, 26, 26, 0.7);
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.funding-main {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: 31% 34% 35%;
+  min-height: 0;
+}
+
+.memo-panel {
+  background: rgba(255, 255, 255, 0.31);
+  border: 1px solid rgba(0, 0, 0, 0.065);
+  display: grid;
+  min-height: 0;
+  padding: 8px 10px;
+}
+
+.panel-title {
+  align-items: center;
+  border-bottom: 1px solid var(--fp-line);
+  display: flex;
+  gap: 8px;
+  margin-bottom: 6px;
+  padding-bottom: 4px;
+}
+
+.panel-title span {
+  color: rgba(31, 63, 114, 0.44);
+  font-size: 10px;
+  font-weight: 950;
+}
+
+.panel-title h3 {
+  color: var(--fp-ink);
+  font-size: 1rem;
+  font-weight: 900;
+  line-height: 1.12;
+}
+
+.lighthouse-panel {
+  grid-template-rows: auto auto minmax(0, 1fr);
+}
+
+.lighthouse-traits {
+  display: grid;
+  gap: 3px;
+  grid-template-columns: 1fr;
+}
+
+.lighthouse-traits article {
+  background: rgba(31, 63, 114, 0.045);
+  border-left: 2px solid rgba(31, 63, 114, 0.18);
+  padding: 4px 6px;
+}
+
+.lighthouse-traits b {
+  color: var(--fp-blue);
+  display: block;
+  font-size: 13px;
+  font-weight: 900;
+  line-height: 1.1;
+}
+
+.lighthouse-traits p {
+  color: rgba(26, 26, 26, 0.68);
+  font-size: 10.7px;
+  font-weight: 620;
+  line-height: 1.12;
+  margin-top: 2px;
+}
+
+.customer-types {
+  border-top: 1px solid var(--fp-line);
+  margin-top: 5px;
+  padding-top: 5px;
+}
+
+.customer-types h4,
+.budget-block h4 {
+  color: rgba(31, 63, 114, 0.7);
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  margin-bottom: 5px;
+}
+
+.customer-types p {
+  margin-bottom: 6px;
+}
+
+.customer-types b {
+  color: rgba(26, 26, 26, 0.82);
+  display: block;
+  font-size: 13.2px;
+  font-weight: 900;
+  line-height: 1.08;
+}
+
+.customer-types span {
+  color: rgba(85, 85, 85, 0.72);
+  display: block;
+  font-size: 12px;
+  font-weight: 560;
+  line-height: 1.12;
+  margin-top: 2px;
+}
+
+.proof-panel {
+  grid-template-rows: auto auto auto minmax(0, 1fr);
+}
+
+.proof-panel,
+.proof-panel * {
+  letter-spacing: 0.01em;
+}
+
+.proof-panel .panel-title {
+  margin-bottom: 7px;
+}
+
+.stress-test {
+  background: var(--fp-warm);
+  border-left: 3px solid var(--fp-warm-line);
+  margin-bottom: 7px;
+  padding: 6px 8px;
+}
+
+.stress-test strong {
+  color: rgba(117, 80, 14, 0.9);
+  display: block;
+  font-size: 13px;
+  font-weight: 950;
+  line-height: 1.18;
+}
+
+.stress-test p {
+  color: rgba(26, 26, 26, 0.78);
+  font-size: 10.8px;
+  font-weight: 650;
+  line-height: 1.18;
+  margin-top: 4px;
+}
+
+.proof-title {
+  color: rgba(31, 63, 114, 0.62);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  margin-bottom: 5px;
+}
+
+.proof-stack {
+  display: grid;
+  gap: 5px;
+  min-height: 0;
+}
+
+.proof-stack article {
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  background: rgba(255, 255, 255, 0.42);
+  padding: 5px 8px;
+}
+
+.proof-stack span {
+  color: rgba(31, 63, 114, 0.58);
+  display: block;
+  font-size: 10.5px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.proof-stack h4 {
+  color: var(--fp-ink);
+  font-size: 12.8px;
+  font-weight: 900;
+  line-height: 1.17;
+  margin: 3px 0 4px;
+}
+
+.proof-stack p {
+  color: rgba(26, 26, 26, 0.74);
+  font-size: 10.7px;
+  font-weight: 610;
+  line-height: 1.18;
+  margin-top: 2px;
+}
+
+.capital-panel {
+  grid-template-rows: auto auto minmax(0, auto);
+}
+
+.vision-box {
+  background:
+    linear-gradient(180deg, rgba(31, 63, 114, 0.065), rgba(255, 255, 255, 0.3));
+  border-left: 3px solid rgba(31, 63, 114, 0.28);
+  box-shadow: inset 18px 0 0 rgba(31, 63, 114, 0.026);
+  margin-bottom: 5px;
+  padding: 7px 9px;
+}
+
+.vision-box strong {
+  color: var(--fp-blue);
+  display: block;
+  font-family: "Kaiti SC", "STKaiti", "Noto Serif SC", "Songti SC", serif;
+  font-size: 16px;
+  font-weight: 950;
+  line-height: 1.14;
+}
+
+.vision-box p {
+  color: rgba(26, 26, 26, 0.72);
+  font-family: "Kaiti SC", "STKaiti", "Noto Serif SC", "Songti SC", serif;
+  font-size: 13.3px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.2;
+  margin-top: 5px;
+}
+
+.vision-highlight,
+.vision-key {
+  color: rgba(18, 45, 86, 0.94);
+  display: inline;
+  font-weight: 950;
+  position: relative;
+  z-index: 0;
+}
+
+.vision-highlight::after {
+  background:
+    linear-gradient(90deg, rgba(217, 162, 27, 0.12), rgba(217, 162, 27, 0.42) 38%, rgba(217, 162, 27, 0.14)),
+    linear-gradient(90deg, transparent 0 7%, rgba(31, 63, 114, 0.28) 8% 92%, transparent 93%);
+  bottom: 0.02em;
+  content: "";
+  height: 0.48em;
+  left: -0.08em;
+  position: absolute;
+  right: -0.08em;
+  transform: rotate(-0.8deg);
+  z-index: -1;
+}
+
+.vision-highlight-primary {
+  color: #132f5b;
+  font-size: 1.06em;
+}
+
+.vision-key {
+  background:
+    linear-gradient(
+      180deg,
+      transparent 0 38%,
+      rgba(255, 226, 102, 0.64) 39% 82%,
+      transparent 83% 100%
+    );
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  padding: 0 0.08em;
+}
+
+.vision-key-final {
+  color: rgba(117, 80, 14, 0.98);
+}
+
+.budget-block {
+  display: grid;
+  gap: 3px;
+}
+
+.budget-row {
+  display: grid;
+  gap: 2px 7px;
+  grid-template-columns: minmax(0, 1fr) 64px;
+}
+
+.budget-row b {
+  color: rgba(26, 26, 26, 0.78);
+  font-size: 9.8px;
+  font-weight: 900;
+  line-height: 1.1;
+}
+
+.budget-row span {
+  color: var(--fp-blue);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 8.8px;
+  font-weight: 900;
+  text-align: right;
+}
+
+.budget-row i {
+  background: rgba(31, 63, 114, 0.1);
+  display: block;
+  grid-column: 1 / -1;
+  height: 7px;
+  overflow: hidden;
+  position: relative;
+}
+
+.budget-row i::before {
+  background: linear-gradient(90deg, rgba(31, 63, 114, 0.9), rgba(217, 162, 27, 0.58));
+  content: "";
+  display: block;
+  height: 100%;
+  width: var(--bar);
+}
+
+.funding-close {
+  align-items: center;
+  background:
+    linear-gradient(90deg, rgba(31, 63, 114, 0.085), rgba(217, 162, 27, 0.08), rgba(31, 63, 114, 0.04));
+  border-left: 3px solid var(--fp-blue);
+  display: grid;
+  grid-template-columns: 318px minmax(0, 1fr);
+  gap: 14px;
+  padding: 6px 86px 6px 12px;
+}
+
+.funding-close strong {
+  color: var(--fp-blue);
+  font-size: 0.92rem;
+  font-weight: 950;
+  line-height: 1.16;
+}
+
+.funding-close p {
+  color: rgba(26, 26, 26, 0.74);
+  font-size: 9.8px;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.funding-close-insight {
+  align-items: center;
+  display: flex;
+  min-width: 0;
+  position: relative;
+}
+
+.funding-close-insight .handwritten-arrow {
+  height: 42px;
+  left: -44px;
+  opacity: 0.7;
+  position: absolute;
+  top: -20px;
+  transform: rotate(-4deg);
+  width: 64px;
+  z-index: 2;
+}
+
+.funding-close-insight .insight-highlight {
+  display: inline-block;
+  padding: 0 5px;
+  position: relative;
+}
+
+.funding-close .funding-close-insight p {
+  background:
+    linear-gradient(
+      180deg,
+      transparent 0 43%,
+      rgba(245, 220, 112, 0.52) 44% 84%,
+      transparent 85% 100%
+    );
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  color: var(--ink-blue);
+  display: inline;
+  font-size: 1.03rem;
+  font-weight: 800;
+  line-height: 1.04;
+  margin: 0;
+  padding: 0 4px;
+}
+
+[data-slug="15-founding-plan"] .anim-fade-up {
+  animation: funding-fade-up 0.72s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes funding-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes funding-card-scan {
+  from {
+    opacity: 0;
+    transform: translateX(-68%);
+  }
+  22% {
+    opacity: 1;
+  }
+  78% {
+    opacity: 0.86;
+  }
+  to {
+    opacity: 0;
+    transform: translateX(70%);
+  }
+}
