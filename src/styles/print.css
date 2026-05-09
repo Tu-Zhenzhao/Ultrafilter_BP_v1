@@ -72,6 +72,142 @@ body.print-export .bp-toolbar {
   position: fixed;
 }
 
+.pdf-snapshot {
+  animation: none !important;
+  background-color: var(--paper-bg);
+  contain: layout paint;
+  display: flex !important;
+  opacity: 1 !important;
+  print-color-adjust: exact;
+  transform: none !important;
+  visibility: visible !important;
+  -webkit-print-color-adjust: exact;
+}
+
+.pdf-snapshot,
+.pdf-snapshot *,
+.pdf-snapshot *::before,
+.pdf-snapshot *::after {
+  animation: none !important;
+  transition: none !important;
+}
+
+.pdf-snapshot .anim-fade-up,
+.pdf-snapshot .anim-fade-in,
+.pdf-snapshot .anim-slide-in-right,
+.pdf-snapshot .anim-node-on,
+.pdf-snapshot .anim-node-glow {
+  animation: none !important;
+  filter: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+.pdf-snapshot[data-slug="03-core-insight"] .num-idle {
+  color: rgba(85, 85, 85, 0.12) !important;
+  -webkit-text-stroke: 1.5px var(--ink-grey) !important;
+}
+
+.pdf-snapshot[data-slug="08-multimodal-search"] .radar-core {
+  left: 68px !important;
+  top: 68px !important;
+  transform: none !important;
+}
+
+.pdf-snapshot[data-slug="08-multimodal-search"] .flow-tracks {
+  left: 160px !important;
+  top: -52px !important;
+  transform: none !important;
+}
+
+.pdf-snapshot[data-slug="10-memory-trace"] .stage-memory-axis::before,
+.pdf-snapshot[data-slug="10-memory-trace"] .stage-memory-axis .axis-line,
+.pdf-snapshot[data-slug="10-memory-trace"] .stage-memory-axis .axis-end,
+.pdf-snapshot[data-slug="10-memory-trace"] .stage-memory-axis .memory-node,
+.pdf-snapshot[data-slug="10-memory-trace"] .first-query span,
+.pdf-snapshot[data-slug="10-memory-trace"] .first-query p,
+.pdf-snapshot[data-slug="10-memory-trace"] .second-query span,
+.pdf-snapshot[data-slug="10-memory-trace"] .second-query p,
+.pdf-snapshot[data-slug="10-memory-trace"] .first-flight-loop,
+.pdf-snapshot[data-slug="10-memory-trace"] .plane-write,
+.pdf-snapshot[data-slug="10-memory-trace"] .route-to-found-flow,
+.pdf-snapshot[data-slug="10-memory-trace"] .route-to-found-arrow,
+.pdf-snapshot[data-slug="10-memory-trace"] .write-to-node,
+.pdf-snapshot[data-slug="10-memory-trace"] .write-text,
+.pdf-snapshot[data-slug="10-memory-trace"] .highlight-node i,
+.pdf-snapshot[data-slug="10-memory-trace"] .highlight-node strong,
+.pdf-snapshot[data-slug="10-memory-trace"] .highlight-node span,
+.pdf-snapshot[data-slug="10-memory-trace"] .highlight-node em,
+.pdf-snapshot[data-slug="10-memory-trace"] .found-console > *,
+.pdf-snapshot[data-slug="10-memory-trace"] .plane-call,
+.pdf-snapshot[data-slug="10-memory-trace"] .call-flight-loop,
+.pdf-snapshot[data-slug="10-memory-trace"] .call-to-node,
+.pdf-snapshot[data-slug="10-memory-trace"] .call-text,
+.pdf-snapshot[data-slug="10-memory-trace"] .call-to-recall,
+.pdf-snapshot[data-slug="10-memory-trace"] .recall-console > *,
+.pdf-snapshot[data-slug="10-memory-trace"] .triangle-content > * {
+  animation: none !important;
+  filter: none !important;
+  opacity: 1 !important;
+}
+
+.pdf-snapshot[data-slug="10-memory-trace"] .stage-memory-axis .axis-line {
+  transform: scaleX(1) !important;
+}
+
+.pdf-snapshot[data-slug="10-memory-trace"] .highlight-node i,
+.pdf-snapshot[data-slug="10-memory-trace"] .highlight-node strong,
+.pdf-snapshot[data-slug="10-memory-trace"] .highlight-node span,
+.pdf-snapshot[data-slug="10-memory-trace"] .highlight-node em,
+.pdf-snapshot[data-slug="10-memory-trace"] .triangle-content > * {
+  transform: none !important;
+}
+
+.pdf-snapshot[data-slug="10-memory-trace"] .route-to-found-glow {
+  animation: none !important;
+  opacity: 0.34 !important;
+}
+
+.pdf-snapshot[data-slug="10-memory-trace"] .call-flow {
+  opacity: 0.82 !important;
+}
+
+.pdf-snapshot[data-slug="14-competition"] .x-axis-cross .axis-line-fine {
+  animation: none !important;
+  transform: scaleX(1) !important;
+}
+
+.pdf-snapshot[data-slug="14-competition"] .y-axis-cross .axis-line-fine {
+  animation: none !important;
+  transform: scaleY(1) !important;
+}
+
+.pdf-snapshot[data-slug="14-competition"] .axis-tag,
+.pdf-snapshot[data-slug="14-competition"] .cluster-blueprint,
+.pdf-snapshot[data-slug="14-competition"] .cluster-strata,
+.pdf-snapshot[data-slug="14-competition"] .cluster-monolith,
+.pdf-snapshot[data-slug="14-competition"] .cluster-nexus {
+  animation: none !important;
+  filter: none !important;
+  opacity: 1 !important;
+}
+
+.pdf-snapshot[data-slug="14-competition"] .axis-tag,
+.pdf-snapshot[data-slug="14-competition"] .cluster-blueprint,
+.pdf-snapshot[data-slug="14-competition"] .cluster-strata,
+.pdf-snapshot[data-slug="14-competition"] .cluster-monolith {
+  transform: none !important;
+}
+
+.pdf-snapshot[data-slug="14-competition"] .cluster-nexus {
+  transform: rotate(-4deg) translate3d(0, 0, 0) scale(1) !important;
+}
+
+.pdf-snapshot[data-slug="14-competition"] .nexus-pin {
+  animation: none !important;
+  transform: scale(1) translateY(0) !important;
+}
+
 @page {
   margin: 0;
   size: 1200px 675px;

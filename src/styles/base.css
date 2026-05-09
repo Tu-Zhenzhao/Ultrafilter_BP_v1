@@ -82,3 +82,54 @@ body.is-mobile-portrait .bp-shell {
   width: 100%;
   z-index: 10;
 }
+
+.export-progress {
+  bottom: 24px;
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  right: 24px;
+  transform: translateY(10px);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  width: min(360px, calc(100vw - 32px));
+  z-index: 200;
+}
+
+.export-progress.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.export-progress__panel {
+  background: rgba(250, 249, 245, 0.96);
+  border: 1px solid rgba(26, 26, 26, 0.16);
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.16);
+  padding: 12px 14px 13px;
+}
+
+.export-progress__label {
+  color: var(--ink-black);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+
+.export-progress__track {
+  background: rgba(26, 26, 26, 0.12);
+  height: 3px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.export-progress__bar {
+  background: var(--ink-blue);
+  height: 100%;
+  transition: width 0.16s ease;
+  width: 0;
+}
+
+.export-progress.is-error .export-progress__bar {
+  background: var(--ink-red);
+}

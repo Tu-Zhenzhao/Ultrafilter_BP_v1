@@ -7,21 +7,30 @@ export function bindExportPdf({ deck }) {
 
   button.addEventListener("click", async () => {
     const originalLabel = button.textContent;
+    const progress = createExportProgress();
     button.disabled = true;
     button.textContent = "EXPORTING";
+    progress.show("准备导出", 0.02);
 
     try {
+      progress.update("加载字体和样式", 0.06);
       await waitForStableLayout();
       const slides = [...deck.stageElement.querySelectorAll(".slide")];
+      const stylesheetText = collectDocumentStyles();
       const images = [];
 
-      for (const slide of slides) {
-        images.push(await renderSlideToJpeg(slide));
+      for (const [index, slide] of slides.entries()) {
+        progress.update(`渲染第 ${index + 1} / ${slides.length} 页`, 0.08 + (index / slides.length) * 0.84);
+        images.push(await renderSlideToJpeg(slide, stylesheetText));
       }
 
+      progress.update("生成 PDF 文件", 0.95);
       downloadBlob(buildPdf(images), "ultrafilter-business-plan.pdf");
+      progress.update("导出完成", 1);
+      setTimeout(() => progress.hide(), 650);
     } catch (error) {
       console.error("PDF export failed", error);
+      progress.fail("导出失败，请重试");
       button.textContent = "EXPORT FAILED";
       await new Promise((resolve) => setTimeout(resolve, 1500));
     } finally {
@@ -40,6 +49,8 @@ export function bindExportPdf({ deck }) {
 }
 
 async function waitForStableLayout() {
+  await waitForStylesheets();
+
   if (document.fonts?.ready) {
     await document.fonts.ready;
   }
@@ -48,29 +59,55 @@ async function waitForStableLayout() {
   await new Promise((resolve) => requestAnimationFrame(resolve));
 }
 
-async function renderSlideToJpeg(slide) {
+async function waitForStylesheets() {
+  const links = [...document.querySelectorAll('link[rel="stylesheet"]')];
+  await Promise.all(links.map(waitForStylesheet));
+}
+
+function waitForStylesheet(link) {
+  if (link.sheet) {
+    return Promise.resolve();
+  }
+
+  return new Promise((resolve) => {
+    const timeout = setTimeout(resolve, 3000);
+    const done = () => {
+      clearTimeout(timeout);
+      resolve();
+    };
+
+    link.addEventListener("load", done, { once: true });
+    link.addEventListener("error", done, { once: true });
+  });
+}
+
+async function renderSlideToJpeg(slide, stylesheetText) {
   const clone = slide.cloneNode(true);
-  clone.classList.add("active");
-  clone.style.display = "flex";
-  clone.style.height = "100%";
-  clone.style.left = "0";
-  clone.style.position = "absolute";
-  clone.style.top = "0";
-  clone.style.width = "100%";
+  prepareSlideClone(clone);
 
   await inlineImages(slide, clone);
-  inlineComputedStyles(slide, clone);
-  forceSlideVisible(clone);
 
   const page = document.createElement("div");
+  page.className = "pdf-snapshot-page";
   page.setAttribute("xmlns", "http://www.w3.org/1999/xhtml");
   page.style.background = getComputedStyle(document.documentElement).getPropertyValue("--paper-bg").trim() || "#f2f0e9";
   page.style.height = `${PDF_HEIGHT}px`;
   page.style.overflow = "hidden";
   page.style.position = "relative";
   page.style.width = `${PDF_WIDTH}px`;
+  appendStylesheet(page, stylesheetText);
   page.appendChild(clone);
   appendPageNumber(page, slide.dataset.pageLabel);
+
+  const host = mountExportPage(page);
+
+  try {
+    await waitForStableLayout();
+    await waitForImages(page);
+    inlineComputedStyles(page);
+  } finally {
+    host.remove();
+  }
 
   const svg = [
     `<svg xmlns="http://www.w3.org/2000/svg" width="${PDF_WIDTH}" height="${PDF_HEIGHT}">`,
@@ -94,8 +131,9 @@ async function renderSlideToJpeg(slide) {
   return base64ToBytes(dataUrl.split(",")[1]);
 }
 
-function forceSlideVisible(slide) {
+function prepareSlideClone(slide) {
   slide.classList.add("active");
+  slide.classList.add("pdf-snapshot");
   slide.style.display = "flex";
   slide.style.flexDirection = "column";
   slide.style.height = "100%";
@@ -108,6 +146,22 @@ function forceSlideVisible(slide) {
   slide.style.width = "100%";
 }
 
+function mountExportPage(page) {
+  const host = document.createElement("div");
+  host.style.height = `${PDF_HEIGHT}px`;
+  host.style.left = "-10000px";
+  host.style.opacity = "0";
+  host.style.overflow = "hidden";
+  host.style.pointerEvents = "none";
+  host.style.position = "fixed";
+  host.style.top = "0";
+  host.style.width = `${PDF_WIDTH}px`;
+  host.style.zIndex = "-1";
+  host.appendChild(page);
+  document.body.appendChild(host);
+  return host;
+}
+
 async function inlineImages(sourceRoot, cloneRoot) {
   const sourceImages = [...sourceRoot.querySelectorAll("img")];
   const cloneImages = [...cloneRoot.querySelectorAll("img")];
@@ -117,43 +171,78 @@ async function inlineImages(sourceRoot, cloneRoot) {
       const cloneImage = cloneImages[index];
       if (!cloneImage) return;
 
+      cloneImage.removeAttribute("srcset");
+      cloneImage.loading = "eager";
+      cloneImage.decoding = "sync";
       cloneImage.src = await imageToDataUrl(sourceImage.currentSrc || sourceImage.src);
     }),
   );
 }
 
 async function imageToDataUrl(src) {
-  const response = await fetch(src);
+  const response = await fetch(src, { cache: "no-store" });
+  if (!response.ok) {
+    throw new Error(`Unable to load image for PDF export: ${src}`);
+  }
+
   const blob = await response.blob();
+  const objectUrl = URL.createObjectURL(blob);
 
-  return await new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = reject;
-    reader.readAsDataURL(blob);
+  try {
+    const image = await loadImage(objectUrl);
+    const canvas = document.createElement("canvas");
+    canvas.width = image.naturalWidth || image.width;
+    canvas.height = image.naturalHeight || image.height;
+    canvas.getContext("2d").drawImage(image, 0, 0);
+    return canvas.toDataURL("image/png");
+  } finally {
+    URL.revokeObjectURL(objectUrl);
+  }
+}
+
+function inlineComputedStyles(root) {
+  const nodes = [root, ...root.querySelectorAll("*")];
+  const snapshots = nodes.map((node) => ({
+    node,
+    styles: readComputedStyles(node),
+  }));
+
+  snapshots.forEach(({ node, styles }) => {
+    const style = node.style;
+    styles.forEach(([property, value, priority]) => {
+      style.setProperty(property, value, priority);
+    });
   });
 }
 
-function inlineComputedStyles(source, clone) {
-  copyComputedStyle(source, clone);
-
-  const sourceNodes = source.querySelectorAll("*");
-  const cloneNodes = clone.querySelectorAll("*");
-
-  sourceNodes.forEach((sourceNode, index) => {
-    copyComputedStyle(sourceNode, cloneNodes[index]);
-  });
-}
-
-function copyComputedStyle(source, clone) {
-  if (!clone) return;
-
-  const computed = getComputedStyle(source);
-  const style = clone.style;
+function readComputedStyles(node) {
+  const computed = getComputedStyle(node);
+  const styles = [];
 
   for (const property of computed) {
-    style.setProperty(property, computed.getPropertyValue(property), computed.getPropertyPriority(property));
+    styles.push([property, computed.getPropertyValue(property), computed.getPropertyPriority(property)]);
   }
+
+  return styles;
+}
+
+function appendStylesheet(page, stylesheetText) {
+  const style = document.createElement("style");
+  style.textContent = stylesheetText;
+  page.appendChild(style);
+}
+
+function collectDocumentStyles() {
+  return [...document.styleSheets]
+    .map((sheet) => {
+      try {
+        return [...sheet.cssRules].map((rule) => rule.cssText).join("\n");
+      } catch {
+        return "";
+      }
+    })
+    .filter(Boolean)
+    .join("\n\n");
 }
 
 function appendPageNumber(page, label) {
@@ -176,6 +265,76 @@ function loadImage(src) {
     image.onerror = reject;
     image.src = src;
   });
+}
+
+async function waitForImages(root) {
+  const images = [...root.querySelectorAll("img")];
+
+  await Promise.all(
+    images.map(async (image) => {
+      if (image.decode) {
+        try {
+          await image.decode();
+          return;
+        } catch {
+          // Fall back to the load/error events below. Some browsers reject
+          // decode() for images that still render correctly.
+        }
+      }
+
+      if (image.complete) return;
+
+      await new Promise((resolve) => {
+        image.addEventListener("load", resolve, { once: true });
+        image.addEventListener("error", resolve, { once: true });
+      });
+    }),
+  );
+}
+
+function createExportProgress() {
+  let root = document.querySelector(".export-progress");
+
+  if (!root) {
+    root = document.createElement("div");
+    root.className = "export-progress";
+    root.setAttribute("role", "status");
+    root.setAttribute("aria-live", "polite");
+    root.innerHTML = `
+      <div class="export-progress__panel">
+        <div class="export-progress__label">准备导出</div>
+        <div class="export-progress__track">
+          <div class="export-progress__bar"></div>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(root);
+  }
+
+  const label = root.querySelector(".export-progress__label");
+  const bar = root.querySelector(".export-progress__bar");
+
+  return {
+    show(text, value) {
+      root.classList.add("is-visible");
+      root.classList.remove("is-error");
+      this.update(text, value);
+    },
+    update(text, value) {
+      label.textContent = text;
+      bar.style.width = `${Math.max(0, Math.min(1, value)) * 100}%`;
+    },
+    fail(text) {
+      root.classList.add("is-visible");
+      root.classList.add("is-error");
+      label.textContent = text;
+      bar.style.width = "100%";
+    },
+    hide() {
+      root.classList.remove("is-visible");
+      root.classList.remove("is-error");
+    },
+  };
 }
 
 function buildPdf(images) {
