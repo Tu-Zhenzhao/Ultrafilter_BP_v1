@@ -76,12 +76,14 @@
 .y-axis-cross .axis-line-fine { width: 1px; }
 
 .axis-tag {
-  background: var(--comp-paper);
-  color: rgba(0,0,0,0.4);
+  background: rgba(242, 240, 233, 0.94);
+  border: 1px solid rgba(31, 63, 114, 0.16);
+  box-shadow: 0 5px 14px rgba(31, 63, 114, 0.08);
+  color: rgba(31, 63, 114, 0.7);
   font-size: 10px;
   font-weight: 900;
   letter-spacing: 0.1em;
-  padding: 4px 10px;
+  padding: 5px 11px;
   text-transform: uppercase;
 }
 
@@ -93,6 +95,74 @@
 }
 
 .cluster { position: absolute; }
+
+[data-slug="14-competition"] .precision-axes .axis-line-fine {
+  will-change: transform;
+}
+
+[data-slug="14-competition"] .x-axis-cross .axis-line-fine {
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+[data-slug="14-competition"] .y-axis-cross .axis-line-fine {
+  transform: scaleY(0);
+  transform-origin: center bottom;
+}
+
+[data-slug="14-competition"] .axis-tag,
+[data-slug="14-competition"] .cluster-blueprint,
+[data-slug="14-competition"] .cluster-strata,
+[data-slug="14-competition"] .cluster-monolith,
+[data-slug="14-competition"] .cluster-nexus {
+  opacity: 0;
+}
+
+.slide.active[data-slug="14-competition"] .x-axis-cross .axis-line-fine {
+  animation: axis-x-draw 0.82s cubic-bezier(0.16, 1, 0.3, 1) 0.72s both;
+}
+
+.slide.active[data-slug="14-competition"] .y-axis-cross .axis-line-fine {
+  animation: axis-y-draw 0.9s cubic-bezier(0.16, 1, 0.3, 1) 1.06s both;
+}
+
+.slide.active[data-slug="14-competition"] .axis-tag.left {
+  animation: axis-tag-pop 0.42s cubic-bezier(0.16, 1, 0.3, 1) 1.04s both;
+}
+
+.slide.active[data-slug="14-competition"] .axis-tag.right {
+  animation: axis-tag-pop 0.42s cubic-bezier(0.16, 1, 0.3, 1) 1.18s both;
+}
+
+.slide.active[data-slug="14-competition"] .axis-tag.bottom {
+  animation: axis-tag-pop 0.42s cubic-bezier(0.16, 1, 0.3, 1) 1.42s both;
+}
+
+.slide.active[data-slug="14-competition"] .axis-tag.top {
+  animation: axis-tag-pop 0.42s cubic-bezier(0.16, 1, 0.3, 1) 1.58s both;
+}
+
+.slide.active[data-slug="14-competition"] .cluster-blueprint {
+  animation: diag-enter-left 0.82s cubic-bezier(0.16, 1, 0.3, 1) 1.72s both;
+}
+
+.slide.active[data-slug="14-competition"] .cluster-monolith {
+  animation: diag-enter-right 0.82s cubic-bezier(0.16, 1, 0.3, 1) 2.08s both;
+}
+
+.slide.active[data-slug="14-competition"] .cluster-strata {
+  animation: diag-enter-left 0.82s cubic-bezier(0.16, 1, 0.3, 1) 2.44s both;
+}
+
+.slide.active[data-slug="14-competition"] .cluster-nexus.anim-float {
+  animation:
+    pin-card-in 0.78s cubic-bezier(0.18, 1.2, 0.28, 1) 3.18s both,
+    card-tap 6.8s ease-in-out 4.02s infinite;
+}
+
+.slide.active[data-slug="14-competition"] .nexus-pin {
+  animation: pin-strike 0.58s cubic-bezier(0.18, 1.2, 0.28, 1) 3.26s both;
+}
 
 /* Shared diagnostic blocks: quiet facts, clear gap, blue answer */
 .cluster-blueprint,
@@ -399,10 +469,98 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-.anim-float { animation: card-tap 6.8s ease-in-out infinite; }
+.anim-float { animation: none; }
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(10px); }
+}
+
+@keyframes axis-x-draw {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@keyframes axis-y-draw {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+
+@keyframes axis-tag-pop {
+  from {
+    filter: blur(2px);
+    opacity: 0;
+    transform: translateY(6px) scale(0.96);
+  }
+  to {
+    filter: blur(0);
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes diag-enter-left {
+  from {
+    filter: blur(4px);
+    opacity: 0;
+    transform: translateX(-18px);
+  }
+  to {
+    filter: blur(0);
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes diag-enter-right {
+  from {
+    filter: blur(4px);
+    opacity: 0;
+    transform: translateX(18px);
+  }
+  to {
+    filter: blur(0);
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pin-card-in {
+  0% {
+    filter: blur(4px);
+    opacity: 0;
+    transform: rotate(-13deg) translate3d(-8px, 10px, 0) scale(0.94);
+  }
+  62% {
+    filter: blur(0);
+    opacity: 1;
+    transform: rotate(-1.4deg) translate3d(1px, -2px, 0) scale(1.015);
+  }
+  100% {
+    filter: blur(0);
+    opacity: 1;
+    transform: rotate(-4deg) translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes pin-strike {
+  0% {
+    box-shadow:
+      0 2px 4px rgba(31, 63, 114, 0),
+      0 0 0 0 rgba(31, 63, 114, 0);
+    transform: scale(2.2) translateY(-5px);
+  }
+  58% {
+    box-shadow:
+      0 2px 4px rgba(31, 63, 114, 0.24),
+      0 0 0 10px rgba(31, 63, 114, 0.1);
+    transform: scale(0.78) translateY(1px);
+  }
+  100% {
+    box-shadow:
+      0 2px 4px rgba(31, 63, 114, 0.22),
+      0 0 0 5px rgba(31, 63, 114, 0.055);
+    transform: scale(1) translateY(0);
+  }
 }
 
 @keyframes card-tap {
