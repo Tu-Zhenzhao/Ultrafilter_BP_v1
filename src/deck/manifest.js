@@ -15,8 +15,8 @@ export const allSlides = [
   { index: 14, slug: "14-competition", title: "竞争定位" },
   { index: 15, slug: "15-founding-plan", title: "本轮融资计划" },
   { index: 16, slug: "16-team", title: "创始人与团队" },
-  { index: 17, slug: "17-moat", title: "护城河" },
-  { index: 18, slug: "18-milestones", title: "里程碑" },
+  { index: 17, slug: "17-future-plan", title: "未来发展计划" },
+  { index: 18, slug: "18-next-plan", title: "下一轮融资计划" },
   { index: 19, slug: "19-funding", title: "融资需求" },
   { index: 20, slug: "20-closing", title: "结尾" }
 ];
@@ -31,7 +31,7 @@ export const allSlides = [
 //   onlySlides: [1, 2, 3, "11-market-timing", "13-ecosystem"]
 // The exported slides are re-numbered for navigation and page labels.
 export const publication = {
-  visibleThrough: 16,
+  visibleThrough: 18,
   hiddenSlides: [],
   onlySlides: [],
 };
